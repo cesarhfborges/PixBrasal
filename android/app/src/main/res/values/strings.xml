@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Pix Brasal</string>
+    <string name="title_activity_main">Pix Brasal</string>
+    <string name="package_name">pixbrasal.brasal.com.br</string>
+    <string name="custom_url_scheme">pixbrasal.brasal.com.br</string>
+</resources>
