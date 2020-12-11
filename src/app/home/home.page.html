@@ -1,20 +1,51 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
-      Blank
+      Pix Brasal
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="teste()">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+<!--    <ion-img style="height: 56px; width: 56px;" slot="end" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWZpMZGDqKPx_Bj6W10A9YvmgVlJSB4R2dIQ&usqp=CAU"></ion-img>-->
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <app-stepper></app-stepper>
+
+  <ion-img
+          class="ion-margin-top ion-padding-top img-logo"
+          src="assets/imgs/brasal_pix.png"
+  ></ion-img>
+
+  <ion-text>Selecione seu nome abaixo para iniciar o pagamento PIX:</ion-text>
+
+  <form [formGroup]="form">
+    <ion-select
+            [interfaceOptions]="customAlertOptions"
+            formControlName="funcionario"
+            interface="alert"
+            placeholder="Selecione..."
+            style="border: 2px solid rgba(0,0,0,.4); margin-top: 4vh;"
+            okText="Selecionar"
+            cancelText="Cancelar"
+    >
+      <ion-select-option *ngFor="let c of colaboradores; let i = index;" [value]="i">{{c}}</ion-select-option>
+    </ion-select>
+  </form>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="showModal()" class="ion-no-margin" expand="block" style="margin-top: 4vh;" color="success" size="large">Continuar</ion-button>
+  </ion-toolbar>
+</ion-footer>

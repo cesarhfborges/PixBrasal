@@ -1,3 +1,15 @@
+ion-header {
+  ion-toolbar {
+
+  }
+}
+
+.img-logo {
+  margin: 0 auto;
+  margin-bottom: 12vh;
+  width: 80%;
+}
+
 #container {
   text-align: center;
 
@@ -20,6 +32,11 @@
   color: #8c8c8c;
 
   margin: 0;
+}
+
+.alert-md .alert-wrapper{
+  max-width: unset !important;
+  width: 100% !important;
 }
 
 #container a {

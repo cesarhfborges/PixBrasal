@@ -1,0 +1,20 @@
+<!-- Horizontal Step -->
+<ul class="stepper stepper-horizontal">
+
+  <!-- First Step -->
+  <li *ngFor="let step of steps; let i = index;" [class]="i === 0 ? 'first' : (i + 1) === steps.length ? 'last' : ''">
+    <div [ngClass]="i < atual ? 'checked' : ''">
+      <span class="circle">
+        <ng-template [ngIf]="step.type === 'img'" [ngIfElse]="img">
+          <ion-img [src]="step.icon"></ion-img>
+        </ng-template>
+        <ng-template #img>
+          <ion-icon [name]="step.icon" size="large"></ion-icon>
+        </ng-template>
+      </span>
+      <span class="label">{{step.name}}</span>
+    </div>
+  </li>
+
+</ul>
+<!-- /.Horizontal Step -->
