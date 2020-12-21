@@ -24,6 +24,18 @@
       <ion-text>Versão:</ion-text>
       <ion-text slot="end">{{details.printerVersion}}</ion-text>
     </ion-item>
+    <ion-item lines="none">
+      <ion-text slot="start">QrCode Size:</ion-text>
+      <ion-input type="number" inputmode="numeric" class="ion-text-center" [(ngModel)]="config.size" style="border: 1px solid rgba(0,0,0,.5)"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-text slot="start">Printer Size:</ion-text>
+      <ion-input type="number" inputmode="numeric" class="ion-text-center" [(ngModel)]="config.printerSize" style="border: 1px solid rgba(0,0,0,.5)"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-text slot="start">Printer Error level:</ion-text>
+      <ion-input type="number" inputmode="numeric" class="ion-text-center" [(ngModel)]="config.errorLevel" style="border: 1px solid rgba(0,0,0,.5)"></ion-input>
+    </ion-item>
   </ion-list>
   <ion-button expand="full" (click)="imprimirTeste()"><ion-icon name="print-outline"></ion-icon> Teste de Impressão</ion-button>
 </ion-content>

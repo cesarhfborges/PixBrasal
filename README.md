@@ -50,4 +50,11 @@ ionic capacitor build ios
 
 ##### Pacotes
 
-- ['ngx-currency']('https://www.npmjs.com/package/ngx-currency') | Mascara monetaria de input configuravel
+- [ngx-currency]('https://www.npmjs.com/package/ngx-currency') | Mascara monetaria de input configuravel
+  
+  <br />
+  <br />
+  <br />
+##### Serviços
+
+- [happi]('https://happi.dev/') | Api para Qrcode Base64
