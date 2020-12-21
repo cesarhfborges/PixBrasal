@@ -52,6 +52,12 @@ export class HomePage {
       this.toastController.create({
         message: 'Nenhum funcionario selecionado.',
         duration: 3000,
+        buttons: [
+          {
+            text: 'x',
+            role: 'cancel'
+          }
+        ]
       }).then(toast => {
         toast.present();
       });
