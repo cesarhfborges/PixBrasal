@@ -8,6 +8,7 @@ import {HomePageRoutingModule} from './home-routing.module';
 import {GerarPagamentoPage} from '../gerar-pagamento/gerar-pagamento.page';
 import {StepperComponent} from '../gerar-pagamento/stepper/stepper.component';
 import {CurrencyMaskInputMode, NgxCurrencyModule} from 'ngx-currency';
+import {ConfigPage} from '../config/config.page';
 
 export const customCurrencyMaskConfig = {
     align: 'right',
@@ -37,6 +38,7 @@ export const customCurrencyMaskConfig = {
     declarations: [
         HomePage,
         GerarPagamentoPage,
+        ConfigPage,
         StepperComponent,
     ]
 })

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {ModalService} from '../shared/services/modal.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastController} from '@ionic/angular';
@@ -11,7 +11,7 @@ declare var sunmiInnerPrinter: any;
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage {
+export class HomePage implements AfterViewInit {
 
   form: FormGroup;
 
@@ -77,9 +77,12 @@ export class HomePage {
 // (window).plugins.sunmiInnerPrinter.printOriginalText("Hello Printer");
 // (window).plugins.sunmiInnerPrinter.printString("Hello String!");
 // sunmiInnerPrinter.printOriginalText("Hello Printer");
-   sunmiInnerPrinter.printerInit();
-   sunmiInnerPrinter.printerSelfChecking();
+   // sunmiInnerPrinter.printerSelfChecking();
    sunmiInnerPrinter.printOriginalText('Hello World!\\n');
-   sunmiInnerPrinter.printString('Hello World!\\n');
+   // sunmiInnerPrinter.printString('Hello World!\\n');
+  }
+
+  ngAfterViewInit(): void {
+    sunmiInnerPrinter.printerInit();
   }
 }
