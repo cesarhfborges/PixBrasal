@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PrintService} from '../shared/services/print.service';
 import {ModalController, Platform} from '@ionic/angular';
 import {QrcodeService} from '../shared/services/qrcode.service';
+import {environment} from '../../environments/environment';
 
 @Component({
     selector: 'app-config',
@@ -74,13 +75,24 @@ export class ConfigPage implements OnInit {
     }
 
     imprimirTeste() {
-        this.printService.setFontSize(30);
-        this.printService.setAlignment(2);
-        this.printService.printString(`Brasal inc.`);
+
+        this.printService.setAlignment(1);
+        this.printService.printBitmap(environment.brasalLogo.replace('data:image/bmp;base64,', ''), 380, 164);
         this.printService.lineWrap(1);
+
         this.printService.setFontSize(20);
-        this.printService.printString(`Cnpj: 00.000.000/0001-55 www.brasal.com.br`);
+        this.printService.setAlignment(1);
+        this.printService.printString(`Cnpj: 00.000.000/0001-55`);
+        this.printService.lineWrap(1);
+
+        this.printService.setFontSize(20);
+        this.printService.setAlignment(1);
+        this.printService.printString(`www.brasal.com.br`);
+        this.printService.lineWrap(2);
+
         this.printService.setFontSize(24);
+        this.printService.setAlignment(1);
+        this.printService.printQRCode('Brasal.com.br', 14, 3);
         this.printService.lineWrap(3);
     }
 }
