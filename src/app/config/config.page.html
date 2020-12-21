@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>config</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <pre class="ion-padding" style="background: rgba(0,0,0,.4); color: black;">
+    {{details|json}}
+  </pre>
+  <ion-button expand="full" fill="outline" (click)="imprimirTeste()">Teste de Impressão</ion-button>
 </ion-content>

@@ -1,9 +1,9 @@
-import {AfterViewInit, Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {ModalService} from '../shared/services/modal.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastController} from '@ionic/angular';
-
-declare var sunmiInnerPrinter: any;
+import {AlertService} from '../shared/services/alert.service';
+import {ToastService} from '../shared/services/toast.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ declare var sunmiInnerPrinter: any;
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage implements AfterViewInit {
+export class HomePage {
 
   form: FormGroup;
 
@@ -35,7 +35,8 @@ export class HomePage implements AfterViewInit {
 
   constructor(
       private modalService: ModalService,
-      private toastController: ToastController,
+      private toastService: ToastService,
+      private alertService: AlertService,
   ) {
     this.form = new FormGroup({
       funcionario: new FormControl(null, [Validators.required])
@@ -49,19 +50,23 @@ export class HomePage implements AfterViewInit {
         this.form.reset();
       });
     } else {
-      this.toastController.create({
-        message: 'Nenhum funcionario selecionado.',
-        duration: 3000,
-        buttons: [
-          {
-            text: 'x',
-            role: 'cancel'
-          }
-        ]
-      }).then(toast => {
-        toast.present();
-      });
+      this.toastService.showToast('Nenhum funcionario selecionado.');
     }
+  }
+
+  openConfig() {
+    this.alertService.presentAlertPrompt().then(response => {
+      console.log('success: ', response);
+      if (response === '1234') {
+        this.modalService.showModalConfig().then(res => {
+          console.log(res);
+        });
+      } else {
+        this.toastService.showToast('A senha informada é inválida.');
+      }
+    }).catch(error => {
+      console.log('error: ', error);
+    });
   }
 
   teste() {
@@ -77,12 +82,9 @@ export class HomePage implements AfterViewInit {
 // (window).plugins.sunmiInnerPrinter.printOriginalText("Hello Printer");
 // (window).plugins.sunmiInnerPrinter.printString("Hello String!");
 // sunmiInnerPrinter.printOriginalText("Hello Printer");
-   // sunmiInnerPrinter.printerSelfChecking();
-   sunmiInnerPrinter.printOriginalText('Hello World!\\n');
-   // sunmiInnerPrinter.printString('Hello World!\\n');
-  }
-
-  ngAfterViewInit(): void {
-    sunmiInnerPrinter.printerInit();
+//    sunmiInnerPrinter.printerInit();
+//    sunmiInnerPrinter.printerSelfChecking();
+//    sunmiInnerPrinter.printOriginalText('Hello World!\\n');
+//    sunmiInnerPrinter.printString('Hello World!\\n');
   }
 }
