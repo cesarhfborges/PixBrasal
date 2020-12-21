@@ -10,42 +10,53 @@ export class PrintService {
   constructor() {
   }
 
-  getInnerPrinter() {
-    return sunmiInnerPrinter;
-  }
-
-  printerInit() {
-    sunmiInnerPrinter.printerInit();
-  }
-
-  hasPrinter(): any {
-    sunmiInnerPrinter.hasPrinter().then(response => {
-      console.log(response);
-      return response;
+  printerInit(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      sunmiInnerPrinter.printerInit(resolve, reject);
     });
   }
 
-  getServiceVersion(): any {
-    return sunmiInnerPrinter.getServiceVersion();
+  hasPrinter(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      sunmiInnerPrinter.hasPrinter(resolve, reject);
+    });
   }
 
-  getFirmwareStatus(): any {
-    return sunmiInnerPrinter.getFirmwareStatus();
+  getServiceVersion(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      sunmiInnerPrinter.getServiceVersion(resolve, reject);
+    });
   }
 
-  getPrinterSerialNo(): any {
-    return sunmiInnerPrinter.getPrinterSerialNo;
+  getFirmwareStatus(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      sunmiInnerPrinter.getFirmwareStatus(resolve, reject);
+    });
   }
 
-  getPrinterVersion(): any {
-    return sunmiInnerPrinter.getPrinterVersion();
+  getPrinterSerialNo(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      sunmiInnerPrinter.getPrinterSerialNo(resolve, reject);
+    });
   }
 
-  getPrinterModal(): any {
-    return sunmiInnerPrinter.getPrinterModal();
+  getPrinterVersion(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      sunmiInnerPrinter.getPrinterVersion(resolve, reject);
+    });
+  }
+
+  getPrinterModal(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      sunmiInnerPrinter.getPrinterModal(resolve, reject);
+    });
   }
 
   printString(text: string): any {
     sunmiInnerPrinter.printString(text);
+  }
+
+  printQRCode(qrCodeData, moduleSize): any {
+    sunmiInnerPrinter.printQRCode(qrCodeData, moduleSize);
   }
 }

@@ -10,8 +10,20 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <pre class="ion-padding" style="background: rgba(0,0,0,.4); color: black;">
-    {{details|json}}
-  </pre>
-  <ion-button expand="full" fill="outline" (click)="imprimirTeste()">Teste de Impressão</ion-button>
+  <h3>Detalhes da Impressora:</h3>
+  <ion-list>
+    <ion-item lines="none">
+      <ion-text>Impressora Ativa:</ion-text>
+      <ion-text slot="end">{{details.hasPrinter ? 'Sim' : 'Nâo'}}</ion-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-text>Serial:</ion-text>
+      <ion-text slot="end">{{details.printerSerialNo}}</ion-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-text>Versão:</ion-text>
+      <ion-text slot="end">{{details.printerVersion}}</ion-text>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="full" (click)="imprimirTeste()"><ion-icon name="print-outline"></ion-icon> Teste de Impressão</ion-button>
 </ion-content>

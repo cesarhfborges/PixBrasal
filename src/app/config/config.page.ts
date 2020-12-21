@@ -1,51 +1,53 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {PrintService} from '../shared/services/print.service';
-import {ModalController} from '@ionic/angular';
+import {ModalController, Platform} from '@ionic/angular';
 
 @Component({
   selector: 'app-config',
   templateUrl: './config.page.html',
   styleUrls: ['./config.page.scss'],
 })
-export class ConfigPage implements OnInit, AfterViewInit {
+export class ConfigPage implements OnInit {
 
   details: {
-    innerPrinter: any;
-    hasPrinter: any;
-    serviceVersion: any;
-    firmwareStatus: any;
-    printerSerialNo: any;
-    printerVersion: any;
-    printerModal: any;
+    init: any;
+    hasPrinter: boolean;
+    printerSerialNo: string;
+    printerVersion: string;
   } = {
-    innerPrinter: null,
-    hasPrinter: null,
-    serviceVersion: null,
-    firmwareStatus: null,
-    printerSerialNo: null,
-    printerVersion: null,
-    printerModal: null,
+    init: null,
+    hasPrinter: false,
+    printerSerialNo: '0',
+    printerVersion: '0',
   };
 
   constructor(
+      private platform: Platform,
       private modalController: ModalController,
       private printService: PrintService,
-  ) { }
+  ) {}
 
   ngOnInit() {
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.details.innerPrinter = this.printService.getInnerPrinter();
-      this.details.hasPrinter = this.printService.hasPrinter();
-      this.details.serviceVersion = this.printService.getServiceVersion();
-      this.details.firmwareStatus = this.printService.getFirmwareStatus();
-      this.details.printerSerialNo = this.printService.getPrinterSerialNo();
-      this.details.printerVersion = this.printService.getPrinterVersion();
-      this.printService.printerInit();
-      // this.details.printerModal = this.printService.getPrinterModal();
-    }, 4000);
+  ionViewDidEnter(): void {
+    if (this.platform.is('cordova')) {
+      this.printService.printerInit().then(response => {
+        this.details.init = response;
+
+        // this.printService.printString('Teste de Impressao');
+        this.printService.hasPrinter().then(printer => {
+          this.details.hasPrinter = printer;
+        });
+        this.printService.getPrinterSerialNo().then(serialNo => {
+          this.details.printerSerialNo = serialNo;
+        });
+        this.printService.getPrinterVersion().then(printerVersion => {
+          this.details.printerVersion = printerVersion;
+        });
+
+      });
+    }
   }
 
   close() {
@@ -58,5 +60,6 @@ export class ConfigPage implements OnInit, AfterViewInit {
 
   imprimirTeste() {
     this.printService.printString('Hello World!\/n');
+    this.printService.printQRCode({title: 'teste'}, 40);
   }
 }
