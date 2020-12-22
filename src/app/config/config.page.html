@@ -5,16 +5,46 @@
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>config</ion-title>
+    <ion-title>Configurações</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h3>Detalhes da Impressora:</h3>
+  <h3>Empresa:</h3>
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item lines="none">
+        <ion-label position="stacked">Filial:</ion-label>
+        <ion-select interface="action-sheet" placeholder="Informe a filial" formControlName="filial" name="filial" okText="Selecionar" cancelText="Cancelar">
+          <ion-select-option value="1">Brasal Combustíveis Sia</ion-select-option>
+          <ion-select-option value="2">Brasal Combustíveis Taguatinga</ion-select-option>
+          <ion-select-option value="3">Brasal Combustíveis Guará</ion-select-option>
+          <ion-select-option value="4">Brasal Combustíveis Ceilândia</ion-select-option>
+          <ion-select-option value="5">Brasal Combustíveis Sudoeste</ion-select-option>
+          <ion-select-option value="6">Brasal Combustíveis Asa Sul</ion-select-option>
+          <ion-select-option *ngFor="let item of [7,8,9,10,11,12,13,14,15,16,17,18,19,20]" [value]="item">Brasal Combustíveis [{{item}}]</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-item lines="none">
+      <ion-label position="stacked">Segmento:</ion-label>
+      <ion-select interface="action-sheet" placeholder="Informe o segmento" formControlName="segmento" name="segmento" okText="Selecionar" cancelText="Cancelar">
+        <ion-select-option value="combustiveis">Combustiveis</ion-select-option>
+        <ion-select-option value="refrigerantes">Refrigerantes</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+  <ion-button expand="full" (click)="logout()" color="danger" class="ion-margin-top">
+    <ion-icon name="log-out-outline"></ion-icon>&nbsp;&nbsp;Sair do sistema
+  </ion-button>
+  <br>
+  <br>
+
+  <h3>Impressora:</h3>
   <ion-list>
     <ion-item lines="none">
       <ion-text>Impressora Ativa:</ion-text>
-      <ion-text slot="end">{{details.hasPrinter ? 'Sim' : 'Nâo'}}</ion-text>
+      <ion-text slot="end" [color]="details.hasPrinter ? 'success' : 'danger'">{{details.hasPrinter ? 'Sim' : 'Nâo'}}</ion-text>
     </ion-item>
     <ion-item lines="none">
       <ion-text>Serial:</ion-text>
@@ -37,5 +67,7 @@
       <ion-input type="number" inputmode="numeric" class="ion-text-center" [(ngModel)]="config.errorLevel" style="border: 1px solid rgba(0,0,0,.5)"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-button expand="full" (click)="imprimirTeste()"><ion-icon name="print-outline"></ion-icon> Teste de Impressão</ion-button>
+  <ion-button expand="full" (click)="imprimirTeste()" color="secondary" class="ion-margin-top">
+    <ion-icon name="print-outline"></ion-icon>&nbsp;&nbsp;Teste de Impressão
+  </ion-button>
 </ion-content>

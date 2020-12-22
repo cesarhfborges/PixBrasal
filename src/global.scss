@@ -40,6 +40,18 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+//@font-face {
+//  font-family: 'MyWebFont'; src/assets/fonts/ptsans/PTC55F.ttf
+//  src: url('webfont.eot'); /* IE9 Compat Modes */
+//  src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+//  url('webfont.woff2') format('woff2'), /* Super Modern Browsers */
+//  url('webfont.woff') format('woff'), /* Pretty Modern Browsers */
+//  url('webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+//  url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+//}
+
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap');
+
 :root {
   --white: #fff;
   --primary: #f96332;
@@ -53,8 +65,12 @@
   --gray: #555555;
   --event: #f49c12;
   --blue: #3880ff;
+  --font: 'Maven Pro', sans-serif;
 }
 
+* {
+  font-family: var(--font);
+}
 
 .bg_color {
   --background: var(--bg-color);
@@ -409,22 +425,23 @@ ion-header {
   .action-sheet-container {
     .action-sheet-group {
       .action-sheet-button {
-        padding: 0 20px;
+        padding: 0 10px;
         color: var(--text-dark);
         font-size: 1.2rem !important;
 
         &.action-sheet-selected {
-          color: var(--primary);
+          color: var(--white);
+          background: var(--primary);
         }
       }
 
       &.action-sheet-group-cancel {
-        background: var(--primary) !important;
+        background: var(--red_color) !important;
         height: 53px;
 
 
         .action-sheet-button {
-          background: var(--primary) !important;
+          background: var(--red_color) !important;
 
           .action-sheet-button-inner {
             font-size: 1.1rem;

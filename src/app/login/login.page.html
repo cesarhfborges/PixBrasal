@@ -1,0 +1,24 @@
+<ion-content>
+  <div style="height: 100%; display: flex; align-items: center; justify-content: center;">
+    <ion-card>
+      <ion-img class="ion-margin-top ion-padding-top img-logo" src="assets/imgs/brasal_pix.png"></ion-img>
+      <h3 class="ion-padding-horizontal ion-no-margin ion-margin-top">Autenticação Pix</h3>
+      <p class="ion-padding ion-no-margin">Por Favor preencha seus dados de acesso abaixo.</p>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <ion-list class="login">
+          <ion-item lines="none">
+            <ion-label position="stacked">E-Mail:</ion-label>
+            <ion-icon name="person-outline" class="input-icon"></ion-icon>
+            <ion-input type="text" formControlName="email" class="input-icon" clearInput autofocus></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label position="stacked">Senha:</ion-label>
+            <ion-icon name="key-outline" class="input-icon"></ion-icon>
+            <ion-input type="password" formControlName="password" class="input-icon" clearInput></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button type="submit" class="ion-margin" expand="block" color="success">Login</ion-button>
+      </form>
+    </ion-card>
+  </div>
+</ion-content>

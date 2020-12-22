@@ -1,10 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button>
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+<!--    <ion-buttons slot="start">-->
+<!--      <ion-button>-->
+<!--        <ion-icon name="arrow-back-outline"></ion-icon>-->
+<!--      </ion-button>-->
+<!--    </ion-buttons>-->
     <ion-title>
       Pix Brasal
     </ion-title>
@@ -32,13 +32,13 @@
     <ion-select
             [interfaceOptions]="customAlertOptions"
             formControlName="funcionario"
-            interface="alert"
+            interface="action-sheet"
             placeholder="Selecione..."
             style="border: 2px solid rgba(0,0,0,.4); margin-top: 4vh;"
             okText="Selecionar"
             cancelText="Cancelar"
     >
-      <ion-select-option *ngFor="let c of colaboradores; let i = index;" [value]="i">{{c}}</ion-select-option>
+      <ion-select-option *ngFor="let c of colaboradores; let i = index;" [value]="i">{{c.substring(0,28)}}</ion-select-option>
     </ion-select>
   </form>
 

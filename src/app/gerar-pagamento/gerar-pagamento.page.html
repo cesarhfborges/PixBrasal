@@ -18,27 +18,40 @@
     <ion-row [ngSwitch]="atualStep" style="height: 100%;">
 
       <ion-col class="ion-no-padding ion-no-margin" size="12" style="height: 100%;" *ngSwitchCase="1">
-        <div style="height: 60%; display: block; width: 100%; padding-top: 10%;">
-          <input
-                  #inputValor
-                  class="form-input"
-                  currencyMask
-                  formControlName="valor"
-                  [options]="inputValorOptions"
-                  onfocus=" let value = this.value; this.value = null; this.value=value"
-                  autofocus
+
+        <ion-item lines="none">
+          <ion-input
+                  type="number"
+                  class="ion-text-center input-money"
+                  enterkeyhint="go"
                   inputmode="numeric"
-                  onClick="this.setSelectionRange(0, this.value.length)"
-          />
-        </div>
-        <div style="height: 40%; display: block; width: 100%; padding-top: 10%;">
-          <ion-text color="primary">Brasal Combustiveis - Sede Sia - Shell</ion-text>
-          <br>
-          <br>
-          <ion-text color="medium">{{dateNow | date : 'EEEE'}}</ion-text>
-          <br>
-          <ion-text color="primary">{{dateNow | date : 'd/m/y  H:mm:ss'}}</ion-text>
-        </div>
+                  name="valor"
+                  style="border: 3px solid red;"
+                  formControlName="valor"
+          ></ion-input>
+        </ion-item>
+
+<!--        <ion-item lines="none">-->
+<!--          <input-->
+<!--                  #inputValor-->
+<!--                  class="form-input"-->
+<!--                  currencyMask-->
+<!--                  formControlName="valor"-->
+<!--                  [options]="inputValorOptions"-->
+<!--                  onfocus=" let value = this.value; this.value = null; this.value=value"-->
+<!--                  autofocus-->
+<!--                  inputmode="numeric"-->
+<!--                  (click)="focus($event)"-->
+<!--          />-->
+<!--        </ion-item>-->
+
+        <br>
+        <br>
+        <ion-text color="primary">Brasal Combustiveis - Sede Sia - Shell</ion-text>
+        <br>
+        <ion-text color="medium">{{dateNow | date : 'EEEE'}}</ion-text>
+        <br>
+        <ion-text color="primary">{{dateNow | date : 'd/m/y  H:mm:ss'}}</ion-text>
       </ion-col>
 
       <ion-col class="ion-no-padding ion-no-margin" size="12" style="height: 100%;" *ngSwitchCase="2">
@@ -71,12 +84,12 @@
   <ion-toolbar color="light">
     <ion-row style="height: 30%">
       <ion-col size="6">
-        <ion-button (click)="atualStepSub()" size="large" expand="block">
+        <ion-button (click)="atualStepSub()" size="large" expand="block" *ngIf="atualStep > 1" color="secondary">
           <ion-text color="light">Voltar</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button (click)="atualStepAdd()" size="large" expand="block">
+        <ion-button (click)="atualStepAdd()" size="large" expand="block" color="success">
           <ion-text color="light">Próximo</ion-text>
         </ion-button>
       </ion-col>

@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {ModalController, Platform} from '@ionic/angular';
 import {Step} from '../shared/models/step';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -29,6 +29,7 @@ export class GerarPagamentoPage implements OnInit {
 
   constructor(
       private modalController: ModalController,
+      private platform: Platform,
   ) {
     this.form = new FormGroup({
       valor: new FormControl(0, [Validators.required, Validators.min(.1)]),
@@ -36,9 +37,15 @@ export class GerarPagamentoPage implements OnInit {
     setInterval(_ => {
       this.dateNow = new Date();
     }, 1000);
+
+    this.platform.keyboardDidShow.subscribe(ev => {
+      const { keyboardHeight } = ev;
+      console.log(ev);
+      // Do something with the keyboard height such as translating an input above the keyboard.
+    });
   }
 
-  @ViewChild('inputValor') inputValor: ElementRef;
+  // @ViewChild('inputValor') inputValor: ElementRef;
 
   atualStep = 1;
 
@@ -83,5 +90,9 @@ export class GerarPagamentoPage implements OnInit {
     if (this.atualStep > 1) {
       this.atualStep--;
     }
+  }
+
+  focus(element) {
+    element.setSelectionRange(0, element.value.length);
   }
 }

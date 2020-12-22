@@ -55,7 +55,7 @@ export class HomePage {
   }
 
   openConfig() {
-    this.alertService.presentAlertPrompt().then(response => {
+    this.alertService.showAlertPassword().then(response => {
       console.log('success: ', response);
       if (response === '1234') {
         this.modalService.showModalConfig().then(res => {

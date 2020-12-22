@@ -18,7 +18,7 @@ export class PrintService {
 
   printerSelfChecking(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      sunmiInnerPrinter.printerInit(resolve, reject);
+      sunmiInnerPrinter.printerSelfChecking(resolve, reject);
     });
   }
 

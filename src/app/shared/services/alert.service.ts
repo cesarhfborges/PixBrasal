@@ -10,19 +10,19 @@ export class AlertService {
       private alertController: AlertController
   ) { }
 
-  async presentAlert() {
+  async showAlertMessage(options: {header: string, subHeader: string, message: string}) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.',
+      header: options.header,
+      subHeader: options.subHeader,
+      message: options.message,
       buttons: ['OK']
     });
 
     await alert.present();
   }
 
-  async presentAlertPrompt(): Promise<any> {
+  async showAlertPassword(): Promise<any> {
     return await new Promise<any>((resolve, reject) => {
       this.alertController.create({
         cssClass: 'my-custom-class',
@@ -46,6 +46,32 @@ export class AlertService {
             text: 'Ok',
             handler: (data) => {
               resolve(data.passwd);
+            }
+          }
+        ]
+      }).then(alert => {
+        alert.present();
+      });
+    });
+  }
+
+  async alertYesNo(options: {header: string, cssClass?: string}): Promise<any> {
+    return await new Promise<any>((resolve, reject) => {
+      this.alertController.create({
+        cssClass: options.cssClass ?? '',
+        header: options.header,
+        buttons: [
+          {
+            text: 'Não',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              reject(false);
+            }
+          }, {
+            text: 'Sim',
+            handler: () => {
+              resolve(true);
             }
           }
         ]
