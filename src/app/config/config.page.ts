@@ -36,10 +36,20 @@ export class ConfigPage implements OnInit {
         size: number;
         printerSize: number;
         errorLevel: number;
+        display: {
+            width: number;
+            height: number;
+        },
+        appVersion: string;
     } = {
         size: 14,
         printerSize: 14,
         errorLevel: 3,
+        display: {
+            width: screen.width,
+            height: screen.height,
+        },
+        appVersion: '1.0.0'
     };
 
     constructor(

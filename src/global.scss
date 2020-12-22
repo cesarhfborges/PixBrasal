@@ -72,6 +72,11 @@
   font-family: var(--font);
 }
 
+ion-app {
+  /*animation of native keyboard show*/
+  transition: margin 300ms;
+}
+
 .bg_color {
   --background: var(--bg-color);
 }
@@ -681,4 +686,29 @@ ion-app[dir="rtl"] {
 
 ion-input.borders {
   border: 2px solid rgba(0,0,0,.4);
+}
+
+ion-alert.passwordAlert {
+  div.alert-wrapper {
+    .alert-input-group {
+      .alert-input-wrapper {
+        input#alert-input-1-0 {
+          font-size: 2rem;
+          text-align: center;
+        }
+      }
+    }
+    .alert-button-group {
+      .alert-button {
+        padding-inline-start: 12px;
+        padding-inline-end: 12px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        .alert-button-inner {
+          color: var(--primary);
+          font-size: 1rem;
+        }
+      }
+    }
+  }
 }

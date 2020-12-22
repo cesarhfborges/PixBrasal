@@ -22,7 +22,7 @@ registerLocaleData(localePt);
         BrowserModule,
         IonicModule.forRoot({scrollAssist: true}),
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     providers: [
         StatusBar,

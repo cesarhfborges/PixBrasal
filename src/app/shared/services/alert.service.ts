@@ -25,7 +25,7 @@ export class AlertService {
   async showAlertPassword(): Promise<any> {
     return await new Promise<any>((resolve, reject) => {
       this.alertController.create({
-        cssClass: 'my-custom-class',
+        cssClass: 'passwordAlert',
         header: 'Senha Administrativa',
         inputs: [
           {
@@ -50,7 +50,11 @@ export class AlertService {
           }
         ]
       }).then(alert => {
-        alert.present();
+        alert.present().then(() => {
+          const firstInput: any = document.querySelector('ion-alert.passwordAlert input');
+          firstInput.focus();
+          return;
+        });
       });
     });
   }

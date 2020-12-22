@@ -7,7 +7,6 @@ import {HomePage} from './home.page';
 import {HomePageRoutingModule} from './home-routing.module';
 import {GerarPagamentoPage} from '../gerar-pagamento/gerar-pagamento.page';
 import {StepperComponent} from '../gerar-pagamento/stepper/stepper.component';
-import {CurrencyMaskInputMode, NgxCurrencyModule} from 'ngx-currency';
 import {ConfigPage} from '../config/config.page';
 
 export const customCurrencyMaskConfig = {
@@ -27,14 +26,13 @@ export const customCurrencyMaskConfig = {
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule,
-    ReactiveFormsModule,
-      NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        HomePageRoutingModule,
+        ReactiveFormsModule,
+    ],
     declarations: [
         HomePage,
         GerarPagamentoPage,

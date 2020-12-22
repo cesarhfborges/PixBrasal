@@ -10,6 +10,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
   <h3>Empresa:</h3>
   <form [formGroup]="form">
     <ion-list>
@@ -39,6 +40,23 @@
   </ion-button>
   <br>
   <br>
+
+  <h3>Dispositivo:</h3>
+  <ion-list>
+    <ion-item lines="none">
+      <ion-text>Display:</ion-text>
+      <ion-text slot="end" color="success">{{config.display.width}}x{{config.display.height}}</ion-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-text>Versão:</ion-text>
+      <ion-text slot="end" color="success">{{config.appVersion}}</ion-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-text>Servidor:</ion-text>
+      <ion-text slot="end" color="success">Conectado</ion-text>
+      <ion-button slot="end" color="secondary">Verificar</ion-button>
+    </ion-item>
+  </ion-list>
 
   <h3>Impressora:</h3>
   <ion-list>
@@ -70,4 +88,5 @@
   <ion-button expand="full" (click)="imprimirTeste()" color="secondary" class="ion-margin-top">
     <ion-icon name="print-outline"></ion-icon>&nbsp;&nbsp;Teste de Impressão
   </ion-button>
+
 </ion-content>

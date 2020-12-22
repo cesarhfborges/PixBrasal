@@ -37,12 +37,6 @@ export class GerarPagamentoPage implements OnInit {
     setInterval(_ => {
       this.dateNow = new Date();
     }, 1000);
-
-    this.platform.keyboardDidShow.subscribe(ev => {
-      const { keyboardHeight } = ev;
-      console.log(ev);
-      // Do something with the keyboard height such as translating an input above the keyboard.
-    });
   }
 
   // @ViewChild('inputValor') inputValor: ElementRef;
@@ -70,6 +64,10 @@ export class GerarPagamentoPage implements OnInit {
   form: FormGroup;
 
   ngOnInit() {
+  }
+
+  scrollTo() {
+    window.scrollTo(0, 950);
   }
 
   close() {
