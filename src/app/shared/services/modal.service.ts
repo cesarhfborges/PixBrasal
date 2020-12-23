@@ -15,7 +15,10 @@ export class ModalService {
   async showModalPagamento() {
     const modal = await this.modalController.create({
       component: GerarPagamentoPage,
-      cssClass: 'gerar-pagamento.page'
+      cssClass: 'gerar-pagamento.page',
+      swipeToClose: false,
+      backdropDismiss: false,
+      keyboardClose: false,
     });
     await modal.present();
     return await modal.onDidDismiss();

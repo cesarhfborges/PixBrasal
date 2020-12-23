@@ -12,27 +12,12 @@ export class GerarPagamentoPage implements OnInit {
 
   dateNow: Date = new Date();
 
-  inputValorOptions = {
-    // align: 'left',
-    allowNegative: false,
-    allowZero: false,
-    decimal: ',',
-    precision: 2,
-    prefix: 'R$ ',
-    suffix: '',
-    thousands: '.',
-    nullable: false,
-    min: 0,
-    max: 10000000,
-    // inputMode: CurrencyMaskInputMode.FINANCIAL
-  };
-
   constructor(
       private modalController: ModalController,
       private platform: Platform,
   ) {
     this.form = new FormGroup({
-      valor: new FormControl(0, [Validators.required, Validators.min(.1)]),
+      valor: new FormControl('0,00', [Validators.required]),
     });
     setInterval(_ => {
       this.dateNow = new Date();

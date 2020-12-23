@@ -8,22 +8,7 @@ import {HomePageRoutingModule} from './home-routing.module';
 import {GerarPagamentoPage} from '../gerar-pagamento/gerar-pagamento.page';
 import {StepperComponent} from '../gerar-pagamento/stepper/stepper.component';
 import {ConfigPage} from '../config/config.page';
-
-export const customCurrencyMaskConfig = {
-    align: 'right',
-    allowNegative: true,
-    allowZero: true,
-    decimal: ',',
-    precision: 2,
-    prefix: 'R$ ',
-    suffix: '',
-    thousands: '.',
-    nullable: false,
-    min: 0.10,
-    max: 100000,
-    // inputMode: CurrencyMaskInputMode.FINANCIAL
-};
-
+import {BrMaskerModule} from 'br-mask';
 
 @NgModule({
     imports: [
@@ -32,6 +17,7 @@ export const customCurrencyMaskConfig = {
         IonicModule,
         HomePageRoutingModule,
         ReactiveFormsModule,
+        BrMaskerModule,
     ],
     declarations: [
         HomePage,

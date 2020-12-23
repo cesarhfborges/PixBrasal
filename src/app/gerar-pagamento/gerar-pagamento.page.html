@@ -24,12 +24,14 @@
         </p>
 
         <ion-input
-                type="number"
+                type="text"
                 class="ion-text-center input-money"
                 enterkeyhint="go"
                 inputmode="numeric"
                 name="valor"
                 formControlName="valor"
+                placeholder="0,00"
+                [brmasker]="{money: true, decimal: 2, userCaracters: false}"
                 (click)="scrollTo()"
         ></ion-input>
 

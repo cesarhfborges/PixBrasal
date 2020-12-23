@@ -12,6 +12,7 @@ import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RequestInterceptor} from './shared/interceptors/request.interceptor';
+import {BrMaskerModule} from 'br-mask';
 
 registerLocaleData(localePt);
 
@@ -23,6 +24,7 @@ registerLocaleData(localePt);
         IonicModule.forRoot({scrollAssist: true}),
         AppRoutingModule,
         HttpClientModule,
+        BrMaskerModule,
     ],
     providers: [
         StatusBar,
