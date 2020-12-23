@@ -9,6 +9,7 @@ import {GerarPagamentoPage} from '../gerar-pagamento/gerar-pagamento.page';
 import {StepperComponent} from '../gerar-pagamento/stepper/stepper.component';
 import {ConfigPage} from '../config/config.page';
 import {BrMaskerModule} from 'br-mask';
+import {InputNumericDirective} from '../shared/directives/input-numeric.directive';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import {BrMaskerModule} from 'br-mask';
         GerarPagamentoPage,
         ConfigPage,
         StepperComponent,
+        InputNumericDirective,
     ]
 })
 export class HomePageModule {

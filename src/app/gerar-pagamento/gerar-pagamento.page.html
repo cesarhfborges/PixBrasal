@@ -24,15 +24,15 @@
         </p>
 
         <ion-input
-                type="text"
-                class="ion-text-center input-money"
+                type="tel"
+                inputmode="decimal"
+                pattern="^\d{2}-\d{3}$"
                 enterkeyhint="go"
-                inputmode="numeric"
+                class="ion-text-center input-money"
                 name="valor"
                 formControlName="valor"
                 placeholder="0,00"
                 [brmasker]="{money: true}"
-                (click)="scrollTo()"
         ></ion-input>
 
         <div style="margin-top: 80px;">

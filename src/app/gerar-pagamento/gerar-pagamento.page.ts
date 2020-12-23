@@ -51,8 +51,14 @@ export class GerarPagamentoPage implements OnInit {
   ngOnInit() {
   }
 
-  scrollTo() {
-    window.scrollTo(0, 950);
+  numberOnly(event): boolean {
+    console.log(event);
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
   }
 
   close() {
