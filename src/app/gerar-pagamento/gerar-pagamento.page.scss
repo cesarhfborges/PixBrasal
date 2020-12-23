@@ -1,11 +1,81 @@
-input.input-money {
-  display: block;
+form.frm-options {
+  height: calc(100% - 110px);
   width: 100%;
-  padding: 8px 12px;
-  border: 2px solid rgba(0,0,0,.4);
-  font-size: 1.5rem;
-  line-height: 1.5rem;
-  text-align: center!important;
+
+  div.options {
+    width: 100%!important;
+    height: 100%!important;
+
+    div.option-items {
+      width: 100%!important;
+      height: 100%!important;
+
+      ion-button.btn-qrPrint {
+        --ion-button-round-border-radius: 400px!important;
+        --ion-button-border-radius: 400px!important;
+        --ion-border-radius: 400px!important;
+        --border-radius: 400px!important;
+        --box-shadow: unset!important;
+        --padding-start: 11px;
+        --padding-end: 11px;
+        :host {
+          --border-radius: 400px;
+        }
+      }
+
+      div.valor {
+        width: 100%;
+        padding: 4px 4px;
+        background: var(--ion-color-secondary);
+        text-align: center;
+        font-size: 1.4em;
+        line-height: 1.4em;
+        font-weight: 700;
+      }
+
+      ion-input.input-money {
+        display: block;
+        width: 100%;
+        padding: 8px 12px;
+        border: 2px solid rgba(0,0,0,.4);
+        border-radius: 6px;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        text-align: center!important;
+      }
+
+      .messageSTatus {
+        background: var(--ion-color-secondary);
+        padding: 4px 8px;
+        border: 4px solid var(--ion-color-secondary);
+        border-radius: 200px;
+        ion-item {
+          --background: rgba(0,0,0,0);
+          :host .item-native {
+            --padding-inline-start: 2px!important;
+          }
+          ion-icon {
+            color: var(--white);
+            margin-inline-end: 8px;
+            font-size: 44px;
+          }
+          ion-text {
+            color: var(--white);
+            font-size: 21px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.no-shadow {
+  --box-shadow: unset!important;
+}
+
+p.text-footer {
+  padding: 0;
+  margin: 0;
 }
 
 

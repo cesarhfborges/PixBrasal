@@ -9,60 +9,98 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding-horizontal">
 
-  <form [formGroup]="form">
+  <form class="frm-options" [formGroup]="form">
 
-    <app-stepper [steps]="steps" [atual]="atualStep" style="display: block;"></app-stepper>
+    <app-stepper [steps]="steps" [atual]="atualStep"></app-stepper>
 
-    <ion-row [ngSwitch]="atualStep" style="height: 100%;">
+    <div class="options" [ngSwitch]="atualStep">
 
-      <ion-col class="ion-no-padding ion-no-margin" size="12" style="height: 100%;" *ngSwitchCase="1">
+      <div class="option-items" *ngSwitchCase="1">
 
-        <ion-item lines="none">
-          <ion-input
-                  type="number"
-                  class="ion-text-center input-money"
-                  enterkeyhint="go"
-                  inputmode="numeric"
-                  name="valor"
-                  style="border: 3px solid red;"
-                  formControlName="valor"
-                  (click)="scrollTo()"
-          ></ion-input>
-        </ion-item>
+        <p class="ion-no-margin ion-margin-bottom" style="margin-top: 20px;">
+          Para Iniciar o pagamento Pix preencha o valor do abastecimento abaixo:
+        </p>
 
-        <br>
-        <br>
-        <ion-text color="primary">Brasal Combustiveis - Sede Sia - Shell</ion-text>
-        <br>
-        <ion-text color="medium">{{dateNow | date : 'EEEE'}}</ion-text>
-        <br>
-        <ion-text color="primary">{{dateNow | date : 'd/m/y  H:mm:ss'}}</ion-text>
-      </ion-col>
+        <ion-input
+                type="number"
+                class="ion-text-center input-money"
+                enterkeyhint="go"
+                inputmode="numeric"
+                name="valor"
+                formControlName="valor"
+                (click)="scrollTo()"
+        ></ion-input>
 
-      <ion-col class="ion-no-padding ion-no-margin" size="12" style="height: 100%;" *ngSwitchCase="2">
+        <div style="margin-top: 90px;">
+          <p class="ion-no-margin ion-no-padding">
+            <ion-text color="primary">Brasal Combustiveis - Sede Sia - Shell</ion-text>
+          </p>
+          <p class="ion-no-margin ion-no-padding">
+            <ion-text color="medium">{{dateNow | date : 'EEEE'}}</ion-text>
+          </p>
+          <p class="ion-no-margin ion-no-padding">
+            <ion-text color="primary">{{dateNow | date : 'd/m/y  H:mm:ss'}}</ion-text>
+          </p>
+        </div>
 
-        <div class="valor" style="width: 100%; padding: 8px 4px; background: #676767; text-align: center; font-size: 1.6em; line-height: 1.6em; font-weight: 700;">
+      </div>
+
+      <div class="option-items" *ngSwitchCase="2">
+
+        <div class="valor">
           <ion-text color="light">{{form.get('valor').value | currency : 'R$'}}</ion-text>
         </div>
 
-        <ion-img style="width: 70%; margin: 0 auto;" src="https://correios.com.br/sobre-os-correios/educacao-e-cultura/centros-e-espacos-culturais-dos-correios/museu-correios/sobre-o-museu/imagens/QRCOde.png/image_preview"></ion-img>
+        <ion-img style="width: 46%; margin: 0 auto; padding-top: 4px;" src="https://sites.usp.br/comcirp/wp-content/uploads/sites/385/2018/05/qrcode.lmim_.png"></ion-img>
 
-        <p>
-          <ion-text color="primary">Verifique a geração do QR Code abaixo.</ion-text>
-          <ion-text color="primary">O Cliente realizará o pagamento apontando o celular para esse QR Code.</ion-text>
-        </p>
-      </ion-col>
-      <ion-col class="ion-no-padding ion-no-margin" size="12" style="height: 100%;" *ngSwitchCase="3">
+        <div style="text-align: center;">
+          <ion-button class="btn-qrPrint" size="large" color="primary">
+            <ion-icon name="print-outline" slot="icon-only" color="light"></ion-icon>
+          </ion-button>
+        </div>
 
-        <ion-img style="width: 70%; margin: 0 auto;" src="https://cdn3.iconfinder.com/data/icons/flat-actions-icons-9/792/Tick_Mark_Dark-512.png"></ion-img>
+        <div style="margin-top: 16px;">
+          <p class="ion-no-margin ion-no-padding">
+            <ion-text color="primary">Verifique a geração do QR Code abaixo.</ion-text>
+          </p>
+          <p class="ion-no-margin ion-no-padding">
+            <ion-text color="primary">O Cliente realizará o pagamento apontando o celular para esse QR Code.</ion-text>
+          </p>
+        </div>
 
-        <p class="ion-text-center">
-          <ion-text color="primary">Pagamento recebido com sucesso</ion-text>
-        </p>
-      </ion-col>
-    </ion-row>
+      </div>
+
+      <div class="option-items" *ngSwitchCase="3">
+
+        <div class="ion-no-margin ion-no-padding ion-text-center messageSTatus" style="margin-top: 16px;">
+          <ion-item lines="none">
+            <ion-icon name="checkmark-done-circle-outline" slot="start"></ion-icon>
+            <ion-text>Pagamento Realizado com sucesso.</ion-text>
+          </ion-item>
+<!--          <p class="ion-no-margin ion-no-padding ion-text-center messageSTatus">-->
+<!--            <ion-icon name="checkmark-done-circle-outline"></ion-icon>-->
+<!--            <ion-text>Pagamento Realizado com sucesso.</ion-text>-->
+<!--          </p>-->
+        </div>
+
+        <div style="margin-top: 55px;">
+          <p class="ion-no-margin ion-no-padding">
+            <ion-text color="medium">Deseja receber o comprovante do Pagamento Pix Brasal combustiveis ?</ion-text>
+          </p>
+        </div>
+
+        <div style="margin-top: 16px;">
+          <ion-button class="no-shadow" size="large" expand="block" color="tertiary">
+            <ion-icon name="print-outline" slot="icon-only" color="light"></ion-icon>&nbsp;<ion-text color="light">Comprovante</ion-text>
+          </ion-button>
+        </div>
+
+
+      </div>
+
+    </div>
 
   </form>
 </ion-content>
@@ -71,13 +109,13 @@
   <ion-toolbar color="light">
     <ion-row style="height: 30%">
       <ion-col size="6">
-        <ion-button (click)="atualStepSub()" size="large" expand="block" *ngIf="atualStep > 1" color="secondary">
+        <ion-button (click)="atualStepSub()" class="no-shadow" size="large" expand="block" *ngIf="atualStep > 1 && atualStep < 3" color="tertiary">
           <ion-text color="light">Voltar</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button (click)="atualStepAdd()" size="large" expand="block" color="success">
-          <ion-text color="light">Próximo</ion-text>
+        <ion-button (click)="atualStepAdd()" class="no-shadow" size="large" expand="block" color="secondary">
+          <ion-text color="light">{{atualStep < this.steps.length ? 'Próximo' : 'Concluir'}}</ion-text>
         </ion-button>
       </ion-col>
     </ion-row>
