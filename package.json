@@ -28,6 +28,7 @@
     "@ionic/angular": "^5.0.0",
     "br-mask": "0.0.10",
     "cordova-plugin-sunmi-inner-printer": "git+https://github.com/tmalbonph/cordova-plugin-sunmi-inner-printer.git",
+    "ngx-currency": "^2.5.2",
     "rxjs": "~6.5.5",
     "text-mask-core": "^5.1.2",
     "tslib": "^2.0.0",

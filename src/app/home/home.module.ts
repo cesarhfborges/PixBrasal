@@ -10,6 +10,7 @@ import {StepperComponent} from '../gerar-pagamento/stepper/stepper.component';
 import {ConfigPage} from '../config/config.page';
 import {BrMaskerModule} from 'br-mask';
 import {InputNumericDirective} from '../shared/directives/input-numeric.directive';
+import {NgxCurrencyModule} from 'ngx-currency';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import {InputNumericDirective} from '../shared/directives/input-numeric.directiv
         HomePageRoutingModule,
         ReactiveFormsModule,
         BrMaskerModule,
+        NgxCurrencyModule,
     ],
     declarations: [
         HomePage,

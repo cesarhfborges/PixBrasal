@@ -13,6 +13,7 @@ import {registerLocaleData} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RequestInterceptor} from './shared/interceptors/request.interceptor';
 import {BrMaskerModule} from 'br-mask';
+import {NgxCurrencyModule} from 'ngx-currency';
 
 registerLocaleData(localePt);
 
@@ -25,6 +26,7 @@ registerLocaleData(localePt);
         AppRoutingModule,
         HttpClientModule,
         BrMaskerModule,
+        NgxCurrencyModule,
     ],
     providers: [
         StatusBar,

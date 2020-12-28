@@ -23,18 +23,28 @@
           Para Iniciar o pagamento Pix preencha o valor do abastecimento abaixo:
         </p>
 
-        <ion-input
+        <input
+                currencyMask
                 type="tel"
-                inputmode="decimal"
-                enterkeyhint="go"
-                class="ion-text-center input-money"
-                name="valor"
+                class="input-money"
                 formControlName="valor"
-                placeholder="0,00"
-                [brmasker]="{money: true}"
-                (ionInput)="changes($event)"
+                [options]="inputValorOptions"
                 (keyup.enter)="atualStepAdd()"
-        ></ion-input>
+                (click)="focus()"
+        />
+
+<!--        <ion-input-->
+<!--                type="tel"-->
+<!--                inputmode="decimal"-->
+<!--                enterkeyhint="go"-->
+<!--                class="ion-text-center input-money"-->
+<!--                name="valor"-->
+<!--                formControlName="valor"-->
+<!--                placeholder="0,00"-->
+<!--                [brmasker]="{money: true}"-->
+<!--                (ionInput)="changes($event)"-->
+<!--                (keyup.enter)="atualStepAdd()"-->
+<!--        ></ion-input>-->
 
         <div style="margin-top: 80px;">
           <p class="ion-no-margin ion-no-padding">

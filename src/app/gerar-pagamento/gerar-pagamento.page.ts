@@ -10,6 +10,21 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class GerarPagamentoPage implements OnInit {
 
+  inputValorOptions = {
+    align: 'center',
+    allowNegative: false,
+    allowZero: false,
+    decimal: ',',
+    precision: 2,
+    prefix: 'R$ ',
+    suffix: '',
+    thousands: '.',
+    nullable: false,
+    min: 0,
+    max: 1000,
+    // inputMode: CurrencyMaskInputMode.FINANCIAL
+  };
+
   dateNow: Date = new Date();
 
   constructor(
@@ -17,7 +32,7 @@ export class GerarPagamentoPage implements OnInit {
       private platform: Platform,
   ) {
     this.form = new FormGroup({
-      valor: new FormControl('0,00', [Validators.required]),
+      valor: new FormControl(0, [Validators.required, Validators.min(.1)]),
     });
     setInterval(_ => {
       this.dateNow = new Date();
@@ -81,8 +96,9 @@ export class GerarPagamentoPage implements OnInit {
     }
   }
 
-  focus(element) {
-    element.setSelectionRange(0, element.value.length);
+  focus() {
+    document.execCommand('selectall', false, null);
+    // element.setSelectionRange(0, element.value.length);
   }
 
   changes($event: any) {
