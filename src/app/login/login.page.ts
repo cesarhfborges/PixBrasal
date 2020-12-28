@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../shared/services/auth.service';
 import {Router} from '@angular/router';
+import {AlertService} from '../shared/services/alert.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +12,17 @@ import {Router} from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
+  @ViewChild('inputEmail') inputEmail: ElementRef;
+
   form: FormGroup;
 
   constructor(
       private authService: AuthService,
       private router: Router,
+      private alertService: AlertService,
   ) {
     this.form = new FormGroup({
-      email: new FormControl('eve.holt@reqres.in', [Validators.required, Validators.email]),
+      email: new FormControl('eve.holt@reqres.inaa', [Validators.required, Validators.email]),
       password: new FormControl('cityslicka', [Validators.required, Validators.minLength(4)])
     });
   }
@@ -37,9 +42,14 @@ export class LoginPage implements OnInit {
           error => {
             console.log(error);
             this.form.enable();
+            if (environment.production) {
+              this.form.get('password').reset();
+            }
+            console.log();
+            // this.inputEmail.el.firstChild.focus();
+            // this.alertService.showAlertMessage({header: 'Ops', subHeader: '', message: 'Não foi possível efetuar login, verifique seu usuário/senha'});
           }
       );
     }
   }
-
 }

@@ -84,4 +84,9 @@ export class GerarPagamentoPage implements OnInit {
   focus(element) {
     element.setSelectionRange(0, element.value.length);
   }
+
+  changes($event: any) {
+    console.log($event);
+    return ['0', '1'].includes($event.detail.data) || $event.detail.inputType === 'deleteContentBackward';
+  }
 }
