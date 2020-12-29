@@ -26,6 +26,21 @@ export class GerarPagamentoPage implements OnInit {
     // inputMode: CurrencyMaskInputMode.FINANCIAL
   };
 
+  inputPhoneOptions = {
+    align: 'center',
+    allowNegative: false,
+    allowZero: false,
+    decimal: ',',
+    precision: 2,
+    prefix: 'R$ ',
+    suffix: '',
+    thousands: '.',
+    nullable: false,
+    min: 0,
+    max: 9999,
+    // inputMode: CurrencyMaskInputMode.FINANCIAL
+  };
+
   dateNow: Date = new Date();
 
   constructor(

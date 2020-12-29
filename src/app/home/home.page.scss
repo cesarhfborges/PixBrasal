@@ -6,7 +6,6 @@ ion-header {
 
 .img-logo {
   margin: 0 auto;
-  margin-bottom: 12vh;
   width: 80%;
 }
 
@@ -58,6 +57,7 @@ ion-select.selectUsuario.ion-invalid {
 
 .details {
   p {
+    text-align: center;
     ion-text {
       font-size: 22px;
       line-height: 22px;
