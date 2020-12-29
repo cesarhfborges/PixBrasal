@@ -34,23 +34,27 @@
             formControlName="funcionario"
             interface="action-sheet"
             placeholder="Selecione..."
-            style="border: 2px solid rgba(0,0,0,.4); margin-top: 4vh;border-radius: 6px;font-size: 1.1rem;line-height: 1.1rem;"
+            ok-text="Selecionar"
             okText="Selecionar"
             cancelText="Cancelar"
+            class="selectUsuario"
     >
       <ion-select-option *ngFor="let c of colaboradores; let i = index;" [value]="i">{{c.substring(0,28)}}</ion-select-option>
     </ion-select>
   </form>
 
-  <div style="margin-top: 40px;">
+  <div style="margin-top: 25px;" class="details">
     <p class="ion-no-margin ion-no-padding">
-      <ion-text color="primary">Brasal Combustiveis - Sede Sia - Shell</ion-text>
+      <ion-text color="primary">Brasal Combustiveis</ion-text>
+    </p>
+    <p class="ion-no-margin ion-no-padding">
+      <ion-text color="primary">Sede Sia - Shell</ion-text>
     </p>
     <p class="ion-no-margin ion-no-padding">
       <ion-text color="medium">{{dateNow | date : 'EEEE'}}</ion-text>
     </p>
     <p class="ion-no-margin ion-no-padding">
-      <ion-text color="primary">{{dateNow | date : 'd/m/y  H:mm:ss'}}</ion-text>
+      <ion-text color="primary">{{dateNow | date : 'd/M/y  H:mm:ss'}}</ion-text>
     </p>
   </div>
 
@@ -58,6 +62,6 @@
 
 <ion-footer class="ion-no-border" [translucent]="true">
   <ion-toolbar>
-    <ion-button (click)="showModal()" class="ion-no-margin" expand="block" style="margin-top: 4vh;" color="secondary" size="large">Continuar</ion-button>
+    <ion-button (click)="showModal()" class="ion-no-margin" expand="block" color="secondary" size="large">Continuar</ion-button>
   </ion-toolbar>
 </ion-footer>

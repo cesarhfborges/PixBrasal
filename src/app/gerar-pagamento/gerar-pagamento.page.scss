@@ -82,81 +82,51 @@ p.text-footer {
 }
 
 
-.bounce ion-col {
-  //animation: bounce;
-  animation: pulse 6s linear forwards;
-  //-webkit-transform-origin: center bottom;
-  //-ms-transform-origin: center bottom;
-  //transform-origin: center bottom;
-  //-webkit-animation-duration: 8s;
-  //animation-duration: 8s;
-  //-webkit-animation-fill-mode: both;
-  //animation-fill-mode: both;
-  animation-iteration-count: infinite;
-  //-webkit-animation-iteration-count: infinite;
-}
-
-.bounce ion-col:nth-child(1) {
-  animation-delay: 1s;
-  background: red;
-}
-
-.bounce ion-col:nth-child(2) {
-  animation-delay: 1.4s;
-  background: blue;
-}
-
-.bounce ion-col:nth-child(3) {
-  animation-delay: 1.8s;
-  background: green;
-}
-
-@-webkit-keyframes pulse {
-  0%,
-  2.498%,
-  6.623%,
-  9.996%,
-  12.499% {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-  4.996%,
-  5.372% {
-    -webkit-transform: scale3d(1.05, 1.05, 1.05);
-    transform: scale3d(1.05, 1.05, 1.05);
-  }
-  11.248% {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-}
-
-@keyframes bounce {
-  0%,
-  2.498%,
-  6.623%,
-  9.996%,
-  12.499% {
-    -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-  4.996%,
-  5.372% {
-    -webkit-transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
-    transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
-    -webkit-transform: translate3d(0, -30px, 0);
-    transform: translate3d(0, -30px, 0);
-  }
-  8.75% {
-    -webkit-transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
-    transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
-    -webkit-transform: translate3d(0, -15px, 0);
-    transform: translate3d(0, -15px, 0);
-  }
-  11.248% {
-    -webkit-transform: translate3d(0, -4px, 0);
-    transform: translate3d(0, -4px, 0);
-  }
-}
+//.bounce ion-col {
+//  //animation: bounce;
+//  animation: pulse 6s linear forwards;
+//  //-webkit-transform-origin: center bottom;
+//  //-ms-transform-origin: center bottom;
+//  //transform-origin: center bottom;
+//  //-webkit-animation-duration: 8s;
+//  //animation-duration: 8s;
+//  //-webkit-animation-fill-mode: both;
+//  //animation-fill-mode: both;
+//  animation-iteration-count: infinite;
+//  //-webkit-animation-iteration-count: infinite;
+//}
+//
+//.bounce ion-col:nth-child(1) {
+//  animation-delay: 1s;
+//  background: red;
+//}
+//
+//.bounce ion-col:nth-child(2) {
+//  animation-delay: 1.4s;
+//  background: blue;
+//}
+//
+//.bounce ion-col:nth-child(3) {
+//  animation-delay: 1.8s;
+//  background: green;
+//}
+//
+//@-webkit-keyframes pulse {
+//  0%,
+//  2.498%,
+//  6.623%,
+//  9.996%,
+//  12.499% {
+//    -webkit-transform: scale3d(1, 1, 1);
+//    transform: scale3d(1, 1, 1);
+//  }
+//  4.996%,
+//  5.372% {
+//    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+//    transform: scale3d(1.05, 1.05, 1.05);
+//  }
+//  11.248% {
+//    -webkit-transform: scale3d(1, 1, 1);
+//    transform: scale3d(1, 1, 1);
+//  }
+//}
