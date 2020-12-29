@@ -687,3 +687,7 @@ ion-app[dir="rtl"] {
 ion-input.borders {
   border: 2px solid rgba(0,0,0,.4);
 }
+
+.inputPass {
+  -webkit-text-security: disc!important;
+}

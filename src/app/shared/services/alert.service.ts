@@ -30,7 +30,8 @@ export class AlertService {
         inputs: [
           {
             name: 'passwd',
-            type: 'password',
+            type: 'tel',
+            cssClass: 'inputPass',
             placeholder: 'Senha'
           }
         ],
