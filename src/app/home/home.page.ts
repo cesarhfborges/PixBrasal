@@ -50,7 +50,7 @@ export class HomePage {
         this.form.reset();
       });
     } else {
-      this.toastService.showToast('Nenhum funcionario selecionado.');
+      this.toastService.showToast('Nenhum funcionário selecionado.');
     }
   }
 
@@ -67,24 +67,5 @@ export class HomePage {
     }).catch(error => {
       console.log('error: ', error);
     });
-  }
-
-  teste() {
-
-//     try {
-//       if (JSON.stringify(sunmiInnerPrinter) !== "{}") {
-//         return;
-//       }
-// // it is safe to use sunmiInnerPrinter here
-//     } catch(err) {
-//       console.log("error: "+ JSON.stringify(err));
-//     }
-// (window).plugins.sunmiInnerPrinter.printOriginalText("Hello Printer");
-// (window).plugins.sunmiInnerPrinter.printString("Hello String!");
-// sunmiInnerPrinter.printOriginalText("Hello Printer");
-//    sunmiInnerPrinter.printerInit();
-//    sunmiInnerPrinter.printerSelfChecking();
-//    sunmiInnerPrinter.printOriginalText('Hello World!\\n');
-//    sunmiInnerPrinter.printString('Hello World!\\n');
   }
 }

@@ -32,7 +32,7 @@ export class AlertService {
             name: 'passwd',
             type: 'tel',
             cssClass: 'inputPass',
-            placeholder: 'Senha'
+            placeholder: 'Senha',
           }
         ],
         buttons: [
@@ -46,6 +46,9 @@ export class AlertService {
           }, {
             text: 'Ok',
             handler: (data) => {
+              if (data.passwd !== '1234') {
+                return false;
+              }
               resolve(data.passwd);
             }
           }
