@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} f
 import {ModalController, Platform} from '@ionic/angular';
 import {Step} from '../shared/models/step';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ToastService} from '../shared/services/toast.service';
 
 @Component({
   selector: 'app-gerar-pagamento',
@@ -21,7 +22,7 @@ export class GerarPagamentoPage implements OnInit {
     thousands: '.',
     nullable: false,
     min: 0,
-    max: 1000,
+    max: 9999,
     // inputMode: CurrencyMaskInputMode.FINANCIAL
   };
 
@@ -30,9 +31,10 @@ export class GerarPagamentoPage implements OnInit {
   constructor(
       private modalController: ModalController,
       private platform: Platform,
+      private toastService: ToastService,
   ) {
     this.form = new FormGroup({
-      valor: new FormControl(0, [Validators.required, Validators.min(.1)]),
+      valor: new FormControl(0, [Validators.required, Validators.min(.01)]),
     });
     setInterval(_ => {
       this.dateNow = new Date();
@@ -86,7 +88,15 @@ export class GerarPagamentoPage implements OnInit {
 
   atualStepAdd() {
     if (this.atualStep < this.steps.length) {
-      this.atualStep++;
+      if (this.atualStep !== 1) {
+        this.atualStep++;
+      } else {
+        if (this.form.valid) {
+          this.atualStep++;
+        } else {
+          this.toastService.showToast('Verifique o valor digitado.');
+        }
+      }
     }
   }
 
