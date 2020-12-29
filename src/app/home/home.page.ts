@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {ModalService} from '../shared/services/modal.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastController} from '@ionic/angular';
@@ -33,6 +33,8 @@ export class HomePage {
     'JESUINO DA SILVA PIRES',
   ];
 
+  dateNow: Date = new Date();
+
   constructor(
       private modalService: ModalService,
       private toastService: ToastService,
@@ -41,6 +43,17 @@ export class HomePage {
     this.form = new FormGroup({
       funcionario: new FormControl(null, [Validators.required])
     });
+
+    setInterval(_ => {
+      this.dateNow = new Date();
+    }, 1000);
+  }
+
+  @HostListener('document:keydown.enter', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    if (document.getElementsByClassName('inputPass').length > 0) {
+      const okButton: any = document.querySelectorAll('ion-alert button')[1];
+      okButton.click();
+    }
   }
 
   showModal() {

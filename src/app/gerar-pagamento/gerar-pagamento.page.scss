@@ -43,6 +43,9 @@ form.frm-options {
         line-height: 1.5rem;
         text-align: center!important;
       }
+      input.input-money:focus {
+        outline: none;
+      }
 
       .messageSTatus {
         background: var(--ion-color-secondary);
