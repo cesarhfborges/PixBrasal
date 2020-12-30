@@ -14,6 +14,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RequestInterceptor} from './shared/interceptors/request.interceptor';
 import {BrMaskerModule} from 'br-mask';
 import {NgxCurrencyModule} from 'ngx-currency';
+import { Autostart } from '@ionic-native/autostart/ngx';
 
 registerLocaleData(localePt);
 
@@ -31,6 +32,7 @@ registerLocaleData(localePt);
     providers: [
         StatusBar,
         SplashScreen,
+        Autostart,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},
         {provide: LOCALE_ID, useValue: 'pt-BR'},
