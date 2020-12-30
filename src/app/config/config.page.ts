@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {PrintService} from '../shared/services/print.service';
-import {AlertController, ModalController, Platform} from '@ionic/angular';
+import {ModalController, Platform} from '@ionic/angular';
 import {QrcodeService} from '../shared/services/qrcode.service';
 import {environment} from '../../environments/environment';
 import {AuthService} from '../shared/services/auth.service';
 import {AlertService} from '../shared/services/alert.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ToastService} from '../shared/services/toast.service';
 
 @Component({
     selector: 'app-config',
@@ -33,6 +34,7 @@ export class ConfigPage implements OnInit {
     };
 
     config: {
+        uuid: any;
         size: number;
         printerSize: number;
         errorLevel: number;
@@ -42,6 +44,7 @@ export class ConfigPage implements OnInit {
         },
         appVersion: string;
     } = {
+        uuid: localStorage.getItem('uniqueDeviceID'),
         size: 14,
         printerSize: 14,
         errorLevel: 3,
@@ -58,7 +61,8 @@ export class ConfigPage implements OnInit {
         private printService: PrintService,
         private qrcodeService: QrcodeService,
         private authService: AuthService,
-        public alertService: AlertService,
+        private alertService: AlertService,
+        private toastService: ToastService,
     ) {
         this.form = new FormGroup({
             segmento: new FormControl('combustiveis', [Validators.required]),
@@ -136,5 +140,14 @@ export class ConfigPage implements OnInit {
                 window.location.reload();
             }
         );
+    }
+
+    copyToClipBoard(val) {
+        navigator.clipboard.writeText(val).then(() => {
+            this.toastService.showToast('Copiado para a área de transferência.');
+        }).catch(e => console.error(e));
+        // inputElement.select();
+        // document.execCommand('copy');
+        // inputElement.setSelectionRange(0, 0);
     }
 }

@@ -44,16 +44,20 @@
   <h3>Dispositivo:</h3>
   <ion-list>
     <ion-item lines="none">
-      <ion-text>Display:</ion-text>
-      <ion-text slot="end" color="success">{{config.display.width}}x{{config.display.height}}</ion-text>
+      <ion-text slot="start">UUID:</ion-text>
+      <ion-text color="success" (click)="copyToClipBoard(config.uuid)">{{config.uuid}}</ion-text>
     </ion-item>
     <ion-item lines="none">
-      <ion-text>Versão:</ion-text>
-      <ion-text slot="end" color="success">{{config.appVersion}}</ion-text>
+      <ion-text slot="start">Display:</ion-text>
+      <ion-text color="success">{{config.display.width}}x{{config.display.height}}</ion-text>
     </ion-item>
     <ion-item lines="none">
-      <ion-text>Servidor:</ion-text>
-      <ion-text slot="end" color="success">Conectado</ion-text>
+      <ion-text slot="start">Versão:</ion-text>
+      <ion-text color="success" (click)="copyToClipBoard(config.appVersion)">{{config.appVersion}}</ion-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-text slot="start">Servidor:</ion-text>
+      <ion-text color="success">Conectado</ion-text>
       <ion-button slot="end" color="secondary">Verificar</ion-button>
     </ion-item>
   </ion-list>
@@ -66,11 +70,11 @@
     </ion-item>
     <ion-item lines="none">
       <ion-text>Serial:</ion-text>
-      <ion-text slot="end">{{details.printerSerialNo}}</ion-text>
+      <ion-text slot="end" (click)="copyToClipBoard(details.printerSerialNo)">{{details.printerSerialNo}}</ion-text>
     </ion-item>
     <ion-item lines="none">
       <ion-text>Versão:</ion-text>
-      <ion-text slot="end">{{details.printerVersion}}</ion-text>
+      <ion-text slot="end" (click)="copyToClipBoard(details.printerVersion)">{{details.printerVersion}}</ion-text>
     </ion-item>
     <ion-item lines="none">
       <ion-text slot="start">QrCode Size:</ion-text>
