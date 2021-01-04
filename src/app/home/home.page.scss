@@ -55,6 +55,10 @@ ion-select.selectUsuario.ion-invalid {
   box-shadow: 0 0 0 rgba(249, 99, 50, 0.4);
 }
 
+ion-select.selectUsuario.ion-invalid.ng-touched {
+  border-color: var(--ion-color-danger);
+}
+
 .details {
   p {
     text-align: center;

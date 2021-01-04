@@ -65,8 +65,8 @@ export class ConfigPage implements OnInit {
         private toastService: ToastService,
     ) {
         this.form = new FormGroup({
-            segmento: new FormControl('combustiveis', [Validators.required]),
             filial: new FormControl('3', [Validators.required]),
+            segmento: new FormControl('combustiveis', [Validators.required]),
         });
     }
 

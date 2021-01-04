@@ -1,7 +1,6 @@
 import {Component, HostListener} from '@angular/core';
 import {ModalService} from '../shared/services/modal.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ToastController} from '@ionic/angular';
 import {AlertService} from '../shared/services/alert.service';
 import {ToastService} from '../shared/services/toast.service';
 
@@ -18,6 +17,14 @@ export class HomePage {
   customAlertOptions: any = {
     header: 'Selecione seu nome abaixo para iniciar o pagamento PIX:',
     translucent: true
+  };
+
+  setup: {
+    enable: boolean,
+    time: number
+  } = {
+    enable: true,
+    time: 60
   };
 
   colaboradores = [
@@ -57,13 +64,17 @@ export class HomePage {
   }
 
   showModal() {
+    this.form.markAllAsTouched();
     if (this.form.valid) {
       this.modalService.showModalPagamento().then(res => {
-        console.log(res);
         this.form.reset();
+      }).finally(() => {
       });
     } else {
       this.toastService.showToast('Nenhum funcionário selecionado.');
+      setTimeout(_ => {
+        this.form.get('funcionario').markAsUntouched();
+      }, 10000);
     }
   }
 

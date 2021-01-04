@@ -65,16 +65,16 @@
   <h3>Impressora:</h3>
   <ion-list>
     <ion-item lines="none">
-      <ion-text>Impressora Ativa:</ion-text>
-      <ion-text slot="end" [color]="details.hasPrinter ? 'success' : 'danger'">{{details.hasPrinter ? 'Sim' : 'Nâo'}}</ion-text>
+      <ion-text slot="start">Impressora Ativa:</ion-text>
+      <ion-text [color]="details.hasPrinter ? 'success' : 'danger'">{{details.hasPrinter ? 'Sim' : 'Nâo'}}</ion-text>
     </ion-item>
     <ion-item lines="none">
-      <ion-text>Serial:</ion-text>
-      <ion-text slot="end" (click)="copyToClipBoard(details.printerSerialNo)">{{details.printerSerialNo}}</ion-text>
+      <ion-text slot="start">Serial:</ion-text>
+      <ion-text (click)="copyToClipBoard(details.printerSerialNo)">{{details.printerSerialNo}}</ion-text>
     </ion-item>
     <ion-item lines="none">
-      <ion-text>Versão:</ion-text>
-      <ion-text slot="end" (click)="copyToClipBoard(details.printerVersion)">{{details.printerVersion}}</ion-text>
+      <ion-text slot="start">Versão:</ion-text>
+      <ion-text (click)="copyToClipBoard(details.printerVersion)">{{details.printerVersion}}</ion-text>
     </ion-item>
     <ion-item lines="none">
       <ion-text slot="start">QrCode Size:</ion-text>
