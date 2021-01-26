@@ -1,8 +1,12 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ModalService} from '../shared/services/modal.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AlertService} from '../shared/services/alert.service';
 import {ToastService} from '../shared/services/toast.service';
+import {AtendentesService} from '../shared/services/atendentes.service';
+import {Colaborador} from '../shared/models/colaborador';
+import {AuthService} from '../shared/services/auth.service';
+import Usuario from '../shared/models/usuario';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +14,9 @@ import {ToastService} from '../shared/services/toast.service';
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage {
+export class HomePage implements OnInit {
+
+  usuario: Usuario;
 
   form: FormGroup;
 
@@ -27,18 +33,7 @@ export class HomePage {
     time: 60
   };
 
-  colaboradores = [
-    'BRUNO VINICIUS PEREIRA DE AMORIM',
-    'ROGERIO JORGE DA SILVA',
-    'LUIZ ALBERTO ANDRADE ARANTES',
-    'JOSE FRANCISCO VIEIRA DE MIRANDA',
-    'IVANILDE ALVES DOS SANTOS',
-    'ALEXANDRE JOSE OLIVEIRA DE OMENA',
-    'ALEXANDRE JOSE OLIVEIRA DE OMENA',
-    'TIAGO MARTINHO DE CARVALHO PORTO DA SILVA',
-    'LARISSA LAIS VIEIRA GOMES',
-    'JESUINO DA SILVA PIRES',
-  ];
+  colaboradores: Colaborador[];
 
   dateNow: Date = new Date();
 
@@ -46,14 +41,47 @@ export class HomePage {
       private modalService: ModalService,
       private toastService: ToastService,
       private alertService: AlertService,
+      private atendentesService: AtendentesService,
+      private authService: AuthService,
   ) {
     this.form = new FormGroup({
-      funcionario: new FormControl(null, [Validators.required])
+      attendant_id: new FormControl(null, [Validators.required])
     });
 
     setInterval(_ => {
       this.dateNow = new Date();
     }, 1000);
+  }
+
+  ngOnInit(): void {
+    this.usuario = this.authService.getUsuario();
+    this.getAtendentes();
+  }
+
+  doRefresh(event) {
+    this.atendentesService.getAtendentes().subscribe(
+        response => {
+          this.colaboradores = response;
+          event.target.complete();
+        },
+        error => {
+          console.log(error);
+          event.target.complete();
+          this.toastService.showToastError('Ops, não foi possivel atualizar a lista de funcionarios, verifique a rede e tente novamente.');
+        }
+    );
+  }
+
+  getAtendentes() {
+    this.atendentesService.getAtendentes().subscribe(
+        response => {
+          this.colaboradores = response;
+        },
+        error => {
+          console.log(error);
+          this.toastService.showToastError('Ops, não foi possivel atualizar a lista de funcionarios, verifique a rede e tente novamente.');
+        }
+    );
   }
 
   @HostListener('document:keydown.enter', ['$event']) onKeydownHandler(event: KeyboardEvent) {
@@ -66,14 +94,15 @@ export class HomePage {
   showModal() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.modalService.showModalPagamento().then(res => {
-        this.form.reset();
-      }).finally(() => {
+      const col = this.colaboradores.find(c => c.id === (this.form.get('attendant_id').value as number));
+      this.modalService.showModalPagamento(col).then(res => {
+          this.form.reset();
+        }).finally(() => {
       });
     } else {
       this.toastService.showToast('Nenhum funcionário selecionado.');
       setTimeout(_ => {
-        this.form.get('funcionario').markAsUntouched();
+        this.form.get('attendant_id').markAsUntouched();
       }, 10000);
     }
   }

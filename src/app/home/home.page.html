@@ -19,19 +19,18 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
-  <app-stepper></app-stepper>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <ion-img
-          class="ion-margin-top ion-padding-top img-logo"
-          src="assets/imgs/brasal_pix.png"
-  ></ion-img>
+  <ion-img class="ion-margin-top ion-padding-top img-logo" src="assets/imgs/brasal_pix.png"></ion-img>
 
   <ion-text style="margin-top: 40px; display: block;">Selecione seu nome abaixo para iniciar o pagamento PIX:</ion-text>
 
   <form [formGroup]="form">
     <ion-select
             [interfaceOptions]="customAlertOptions"
-            formControlName="funcionario"
+            formControlName="attendant_id"
             interface="action-sheet"
             placeholder="Selecione..."
             ok-text="Selecionar"
@@ -39,7 +38,7 @@
             cancelText="Cancelar"
             class="selectUsuario"
     >
-      <ion-select-option *ngFor="let c of colaboradores; let i = index;" [value]="i">{{c.substring(0,28)}}</ion-select-option>
+      <ion-select-option *ngFor="let c of colaboradores; let i = index;" [value]="c.id">{{c.name?.substring(0,28)}}</ion-select-option>
     </ion-select>
   </form>
 
@@ -48,7 +47,7 @@
       <ion-text color="primary">Brasal Combustiveis</ion-text>
     </p>
     <p class="ion-no-margin ion-no-padding">
-      <ion-text color="primary">Sede Sia - Shell</ion-text>
+      <ion-text color="primary">{{usuario ? usuario.station.name : 'Error'}}</ion-text>
     </p>
     <p class="ion-no-margin ion-no-padding" style="margin-top: 16px">
       <ion-text color="medium">{{dateNow | date : 'EEEE'}}</ion-text>

@@ -9,7 +9,7 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import localePt from '@angular/common/locales/pt';
-import {registerLocaleData} from '@angular/common';
+import {DatePipe, registerLocaleData} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RequestInterceptor} from './shared/interceptors/request.interceptor';
 import {BrMaskerModule} from 'br-mask';
@@ -35,9 +35,10 @@ registerLocaleData(localePt);
         SplashScreen,
         Autostart,
         UniqueDeviceID,
+        DatePipe,
+        {provide: LOCALE_ID, useValue: 'pt-BR'},
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},
-        {provide: LOCALE_ID, useValue: 'pt-BR'},
     ],
     bootstrap: [AppComponent]
 })

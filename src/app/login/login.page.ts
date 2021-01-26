@@ -22,21 +22,28 @@ export class LoginPage implements OnInit {
       private alertService: AlertService,
   ) {
     this.form = new FormGroup({
-      email: new FormControl('eve.holt@reqres.inaa', [Validators.required, Validators.email]),
-      password: new FormControl('cityslicka', [Validators.required, Validators.minLength(4)])
+      username: new FormControl(null, [Validators.required, Validators.minLength(4)]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(4)])
     });
+    if (!environment.production) {
+      this.form.patchValue({
+        username: 'postosia',
+        password: 'j-3IVQ02GY',
+      });
+    }
   }
 
   ngOnInit() {
   }
 
   onSubmit() {
+    this.form.markAllAsTouched();
     if (this.form.valid) {
       this.form.disable();
       this.authService.login(this.form.value).subscribe(
           response => {
-            this.form.reset();
             this.form.enable();
+            this.form.reset();
             this.router.navigate(['/home']);
           },
           error => {

@@ -7,6 +7,7 @@ import {AuthService} from '../shared/services/auth.service';
 import {AlertService} from '../shared/services/alert.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastService} from '../shared/services/toast.service';
+import Usuario from '../shared/models/usuario';
 
 @Component({
     selector: 'app-config',
@@ -15,7 +16,7 @@ import {ToastService} from '../shared/services/toast.service';
 })
 export class ConfigPage implements OnInit {
 
-    form: FormGroup;
+    usuario: Usuario;
 
     details: {
         init: any;
@@ -64,13 +65,10 @@ export class ConfigPage implements OnInit {
         private alertService: AlertService,
         private toastService: ToastService,
     ) {
-        this.form = new FormGroup({
-            filial: new FormControl('3', [Validators.required]),
-            segmento: new FormControl('combustiveis', [Validators.required]),
-        });
     }
 
     ngOnInit(): void {
+        this.usuario = this.authService.getUsuario();
     }
 
     ionViewDidEnter(): void {

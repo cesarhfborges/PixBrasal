@@ -28,7 +28,7 @@ import {NgxCurrencyModule} from 'ngx-currency';
         ConfigPage,
         StepperComponent,
         InputNumericDirective,
-    ]
+    ],
 })
 export class HomePageModule {
 }

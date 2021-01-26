@@ -7,9 +7,9 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <ion-list class="login">
           <ion-item lines="none">
-            <ion-label position="stacked">E-Mail:</ion-label>
+            <ion-label position="stacked">Usuário:</ion-label>
             <ion-icon name="person-outline" class="input-icon"></ion-icon>
-            <ion-input type="text" #inputEmail formControlName="email" class="input-icon" clearInput autofocus></ion-input>
+            <ion-input type="text" #inputEmail formControlName="username" class="input-icon" clearInput autofocus></ion-input>
           </ion-item>
           <ion-item lines="none">
             <ion-label position="stacked">Senha:</ion-label>

@@ -24,36 +24,26 @@
         </p>
 
         <input
-                currencyMask
-                type="tel"
-                class="input-money"
-                formControlName="valor"
-                [options]="inputValorOptions"
-                (keyup.enter)="atualStepAdd()"
-                (click)="focus()"
+           currencyMask
+           type="tel"
+           class="input-money"
+           formControlName="price"
+           [options]="inputValorOptions"
+           (keyup.enter)="atualStepAdd()"
+           (click)="focus()"
         />
 
-<!--        <ion-input-->
-<!--                type="tel"-->
-<!--                inputmode="decimal"-->
-<!--                enterkeyhint="go"-->
-<!--                class="ion-text-center input-money"-->
-<!--                name="valor"-->
-<!--                formControlName="valor"-->
-<!--                placeholder="0,00"-->
-<!--                [brmasker]="{money: true}"-->
-<!--                (ionInput)="changes($event)"-->
-<!--                (keyup.enter)="atualStepAdd()"-->
-<!--        ></ion-input>-->
-
         <div style="margin-top: 80px;">
-          <p class="ion-no-margin ion-no-padding">
-            <ion-text color="primary">Brasal Combustiveis - Sede Sia - Shell</ion-text>
+          <p class="ion-no-margin ion-no-padding ion-text-center">
+            <ion-text color="primary">Brasal Combustiveis</ion-text>
           </p>
-          <p class="ion-no-margin ion-no-padding">
+          <p class="ion-no-margin ion-no-padding ion-text-center">
+            <ion-text color="primary">{{usuario ? usuario.station.name : 'Error'}}</ion-text>
+          </p>
+          <p class="ion-no-margin ion-no-padding ion-text-center">
             <ion-text color="medium">{{dateNow | date : 'EEEE'}}</ion-text>
           </p>
-          <p class="ion-no-margin ion-no-padding">
+          <p class="ion-no-margin ion-no-padding ion-text-center">
             <ion-text color="primary">{{dateNow | date : 'dd/MM/yyyy  HH:mm:ss'}}</ion-text>
           </p>
         </div>
@@ -63,13 +53,13 @@
       <div class="option-items" *ngSwitchCase="2">
 
         <div class="valor">
-          <ion-text color="light">{{form.get('valor').value | currency : 'R$'}}</ion-text>
+          <ion-text color="light">{{form.get('price').value | currency : 'R$'}}</ion-text>
         </div>
 
-        <ion-img style="width: 46%; margin: 0 auto; padding-top: 4px;" src="https://sites.usp.br/comcirp/wp-content/uploads/sites/385/2018/05/qrcode.lmim_.png"></ion-img>
+        <ion-img style="width: 46%; margin: 0 auto; padding-top: 4px;" *ngIf="pagamento" [src]="pagamento.qrcode_url"></ion-img>
 
         <div style="text-align: center;">
-          <ion-button class="btn-qrPrint" size="large" color="primary">
+          <ion-button class="btn-qrPrint" size="large" color="primary" (click)="imprimirQrCode()">
             <ion-icon name="print-outline" slot="icon-only" color="light"></ion-icon>
           </ion-button>
         </div>
@@ -92,10 +82,6 @@
             <ion-icon name="checkmark-done-circle-outline" slot="start"></ion-icon>
             <ion-text>Pagamento Realizado com sucesso.</ion-text>
           </ion-item>
-<!--          <p class="ion-no-margin ion-no-padding ion-text-center messageSTatus">-->
-<!--            <ion-icon name="checkmark-done-circle-outline"></ion-icon>-->
-<!--            <ion-text>Pagamento Realizado com sucesso.</ion-text>-->
-<!--          </p>-->
         </div>
 
         <div style="margin-top: 50px;">
