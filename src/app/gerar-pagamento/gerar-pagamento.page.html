@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button (click)="close()">
+      <ion-button (click)="close()" *ngIf="atualStep < 3">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Valor do abastecimento</ion-title>
+    <ion-title>Valor do abastecimento - {{atualStep}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -77,27 +77,11 @@
 
       <div class="option-items" *ngSwitchCase="3">
 
-        <div class="ion-no-margin ion-no-padding ion-text-center messageSTatus" style="margin-top: 16px;">
+        <div class="ion-no-margin ion-no-padding ion-text-center messageSTatus" style="margin-top: 100px;">
           <ion-item lines="none">
             <ion-icon name="checkmark-done-circle-outline" slot="start"></ion-icon>
             <ion-text>Pagamento Realizado com sucesso.</ion-text>
           </ion-item>
-        </div>
-
-        <div style="margin-top: 50px;">
-          <p class="ion-no-margin ion-no-padding">
-            <ion-text color="medium">Deseja receber o comprovante do Pagamento Pix Brasal combustiveis ?</ion-text>
-          </p>
-        </div>
-
-        <div style="margin-top: 16px;">
-          <ion-button class="no-shadow" size="large" expand="block" color="tertiary">
-            <ion-icon name="print-outline" slot="icon-only" color="light"></ion-icon>&nbsp;<ion-text color="light">Comprovante</ion-text>
-          </ion-button>
-        </div>
-
-        <div style="margin-top: 16px;" *ngIf="false">
-          <ion-input type="tel" style="border: 1px solid black; border-radius: 8px; text-align: center" placeholder="(xx) xxxxx-xxxx"></ion-input>
         </div>
 
       </div>

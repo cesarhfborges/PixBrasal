@@ -114,7 +114,7 @@ export class GerarPagamentoPage implements OnInit {
         this.modalController.dismiss(false);
     }
 
-    finish() {
+    finish(): void {
         this.modalController.dismiss(true);
     }
 
@@ -125,7 +125,7 @@ export class GerarPagamentoPage implements OnInit {
     }
 
     atualStepAdd() {
-        if (this.atualStep < this.steps.length) {
+        if (this.atualStep <= this.steps.length) {
             switch (this.atualStep) {
                 case 1:
                     this.gerarPagamento();
@@ -134,7 +134,7 @@ export class GerarPagamentoPage implements OnInit {
                     this.checkPagamento();
                     break;
                 case 3:
-                    this.modalController.dismiss(true);
+                    this.finish();
                     break;
             }
         }
@@ -235,6 +235,18 @@ export class GerarPagamentoPage implements OnInit {
             error => {
                 console.log(error);
                 this.loadingController.dismiss();
+                this.alertController.create({
+                    cssClass: 'my-custom-class',
+                    header: 'Confirm!',
+                    message: 'Pagamento não confirmado pendente.',
+                    buttons: [
+                        {
+                            text: 'Okay',
+                            handler: () => {
+                            }
+                        }
+                    ]
+                }).then(a => a.present());
             }
         );
     }
