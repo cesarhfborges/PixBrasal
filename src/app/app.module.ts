@@ -14,8 +14,9 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RequestInterceptor} from './shared/interceptors/request.interceptor';
 import {BrMaskerModule} from 'br-mask';
 import {NgxCurrencyModule} from 'ngx-currency';
-import { Autostart } from '@ionic-native/autostart/ngx';
-import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+import {Autostart} from '@ionic-native/autostart/ngx';
+import {UniqueDeviceID} from '@ionic-native/unique-device-id/ngx';
+import {ErrorsInterceptor} from './shared/interceptors/errors.interceptor';
 
 registerLocaleData(localePt);
 
@@ -39,6 +40,7 @@ registerLocaleData(localePt);
         {provide: LOCALE_ID, useValue: 'pt-BR'},
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: ErrorsInterceptor, multi: true},
     ],
     bootstrap: [AppComponent]
 })

@@ -25,6 +25,10 @@ export class AuthService {
         }));
     }
 
+    tokenRefresh(): Observable<any> {
+        return this.http.post<any>(`${environment.apiUrl}/auth/refresh`, {});
+    }
+
     getToken(): string {
         return this.isAuthenticated() ? JSON.parse(localStorage.getItem('credentials')).access_token : undefined;
     }
