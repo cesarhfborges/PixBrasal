@@ -3,4 +3,5 @@ export interface Qrcode {
     txid: string;
     qrcode_url: string;
     qrcode_base64: string;
+    is_paid: boolean;
 }

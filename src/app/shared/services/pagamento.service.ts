@@ -16,4 +16,8 @@ export class PagamentoService {
     gerarPagamento(data): Observable<any> {
         return this.http.post<any>(`${environment.apiUrl}/qrcode`, data);
     }
+
+    checarPagamento(id: string): Observable<any> {
+        return this.http.get<any>(`${environment.apiUrl}/qrcode/dynamic/${id}/payment`);
+    }
 }

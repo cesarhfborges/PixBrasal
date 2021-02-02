@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LoadingController, ModalController, Platform} from '@ionic/angular';
+import {AlertController, LoadingController, ModalController, Platform} from '@ionic/angular';
 import {Step} from '../shared/models/step';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastService} from '../shared/services/toast.service';
@@ -84,6 +84,7 @@ export class GerarPagamentoPage implements OnInit {
         private printService: PrintService,
         private datePipe: DatePipe,
         private authService: AuthService,
+        private alertController: AlertController,
     ) {
         this.form = new FormGroup({
             price: new FormControl(0, [Validators.required, Validators.min(.01)]),
@@ -117,42 +118,25 @@ export class GerarPagamentoPage implements OnInit {
         this.modalController.dismiss(true);
     }
 
-    atualStepAdd() {
-        if (this.atualStep < this.steps.length) {
-            if (this.atualStep !== 1) {
-                this.atualStep++;
-            } else {
-                if (this.form.valid) {
-
-                    this.loadingController.create({
-                        cssClass: 'my-custom-class',
-                        message: 'Gerando pagamento...',
-                    }).then(l => l.present());
-
-                    this.pagamentoService.gerarPagamento(this.form.value).subscribe(
-                        response => {
-                            this.pagamento = response;
-                            this.loadingController.dismiss().then(() => {
-                                this.atualStep++;
-                            }).catch();
-                        },
-                        error => {
-                            console.log(error);
-                            this.loadingController.dismiss().then(() => {
-                                // this.atualStep++;
-                            }).catch();
-                        }
-                    );
-                } else {
-                    this.toastService.showToast('Verifique o valor digitado.');
-                }
-            }
-        }
-    }
-
     atualStepSub() {
         if (this.atualStep > 1) {
             this.atualStep--;
+        }
+    }
+
+    atualStepAdd() {
+        if (this.atualStep < this.steps.length) {
+            switch (this.atualStep) {
+                case 1:
+                    this.gerarPagamento();
+                    break;
+                case 2:
+                    this.checkPagamento();
+                    break;
+                case 3:
+                    this.modalController.dismiss(true);
+                    break;
+            }
         }
     }
 
@@ -220,5 +204,66 @@ export class GerarPagamentoPage implements OnInit {
             };
             reader.readAsDataURL(blob);
         });
+    }
+
+    private checkPagamento(): void {
+        this.loadingController.create({
+            cssClass: 'my-custom-class',
+            message: 'Aguarde, Verificando pagamento.',
+        }).then(l => l.present());
+        this.pagamentoService.checarPagamento(this.pagamento.txid).subscribe(
+            response => {
+                console.log(response);
+                if (response.is_paid) {
+                    this.loadingController.dismiss();
+                    this.atualStep++;
+                } else {
+                    this.alertController.create({
+                        cssClass: 'my-custom-class',
+                        header: 'Confirm!',
+                        message: 'Pagamento ainda pendente',
+                        buttons: [
+                            {
+                                text: 'Okay',
+                                handler: () => {
+                                }
+                            }
+                        ]
+                    }).then(a => a.present());
+                }
+            },
+            error => {
+                console.log(error);
+                this.loadingController.dismiss();
+            }
+        );
+    }
+
+    private gerarPagamento(): void {
+        if (this.form.valid) {
+
+            this.loadingController.create({
+                cssClass: 'my-custom-class',
+                message: 'Gerando pagamento...',
+            }).then(l => l.present());
+
+            this.pagamentoService.gerarPagamento(this.form.value).subscribe(
+                response => {
+                    this.pagamento = {...response, is_paid: false};
+                    this.loadingController.dismiss().then(() => {
+                        this.atualStep++;
+                    }).catch();
+                },
+                error => {
+                    console.log(error);
+
+                    this.loadingController.dismiss().then(() => {
+                        // this.atualStepSub();
+                    }).catch();
+                }
+            );
+        } else {
+            this.toastService.showToast('Verifique o valor digitado.');
+        }
     }
 }
