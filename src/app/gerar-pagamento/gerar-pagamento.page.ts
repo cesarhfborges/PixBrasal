@@ -213,11 +213,12 @@ export class GerarPagamentoPage implements OnInit {
         }).then(l => l.present());
         this.pagamentoService.checarPagamento(this.pagamento.txid).subscribe(
             response => {
-                console.log(response);
                 if (response.is_paid) {
+                    this.pagamento.pix_data_print = response.pix_data_print;
                     this.loadingController.dismiss();
                     this.atualStep++;
                 } else {
+                    this.loadingController.dismiss();
                     this.alertController.create({
                         cssClass: 'my-custom-class',
                         header: 'Confirm!',
@@ -238,10 +239,10 @@ export class GerarPagamentoPage implements OnInit {
                 this.alertController.create({
                     cssClass: 'my-custom-class',
                     header: 'Confirm!',
-                    message: 'Pagamento não confirmado pendente.',
+                    message: 'Pagamento não confirmado.',
                     buttons: [
                         {
-                            text: 'Okay',
+                            text: 'Ok',
                             handler: () => {
                             }
                         }
@@ -268,10 +269,19 @@ export class GerarPagamentoPage implements OnInit {
                 },
                 error => {
                     console.log(error);
-
-                    this.loadingController.dismiss().then(() => {
-                        // this.atualStepSub();
-                    }).catch();
+                    this.loadingController.dismiss();
+                    this.alertController.create({
+                        cssClass: 'my-custom-class',
+                        header: 'Ops',
+                        message: 'Erro ao gerar pagamento, verifique a conexão de internet.',
+                        buttons: [
+                            {
+                                text: 'Ok',
+                                handler: () => {
+                                }
+                            }
+                        ]
+                    }).then(a => a.present());
                 }
             );
         } else {

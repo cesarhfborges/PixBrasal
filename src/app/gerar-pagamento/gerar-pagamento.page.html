@@ -5,7 +5,7 @@
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Valor do abastecimento - {{atualStep}}</ion-title>
+    <ion-title>Abastecimento</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -77,12 +77,17 @@
 
       <div class="option-items" *ngSwitchCase="3">
 
-        <div class="ion-no-margin ion-no-padding ion-text-center messageSTatus" style="margin-top: 100px;">
+        <div class="ion-no-margin ion-no-padding ion-text-center messageSTatus" style="margin-top: 36px;">
           <ion-item lines="none">
             <ion-icon name="checkmark-done-circle-outline" slot="start"></ion-icon>
-            <ion-text>Pagamento Realizado com sucesso.</ion-text>
+            <ion-text>{{pagamento.is_paid ? pagamento.message : 'Pagamento Realizado com sucesso.'}}</ion-text>
           </ion-item>
         </div>
+
+        <p>Atendente: {{pagamento.pix_data_print?.attendant.name}}</p>
+        <p>Cliente: {{pagamento.pix_data_print?.client.name}}</p>
+        <p>Valor Pago: R$ {{pagamento.pix_data_print?.pix_value}}</p>
+        <p>Data/Hora: {{pagamento.pix_data_print?.pix_created_at}}</p>
 
       </div>
 
