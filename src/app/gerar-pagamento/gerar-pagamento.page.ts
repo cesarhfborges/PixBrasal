@@ -1,3 +1,4 @@
+/* tslint:disable:no-shadowed-variable */
 import {Component, OnInit} from '@angular/core';
 import {AlertController, LoadingController, ModalController, Platform} from '@ionic/angular';
 import {Step} from '../shared/models/step';
@@ -98,6 +99,35 @@ export class GerarPagamentoPage implements OnInit {
     ngOnInit() {
         this.usuario = this.authService.getUsuario();
         this.form.get('attendant_id').patchValue(this.colaborador.id);
+
+
+        // // for dev only
+        // this.pagamento = {
+        //     message: "Pagamento Efetuado com Sucesso.",
+        //     txid: "7d95688878cc47fe8a39c9f38d7581bc",
+        //     qrcode_url: "https://pix.brasal.com.br/api/v2/qrcode/7d95688878cc47fe8a39c9f38d7581bc/image",
+        //     is_paid: true,
+        //     qrcode_base64: 'sdfasdfasdfasdfasdf'
+        // };
+        // this.pagamento.pix_data_print = {
+        //     title: 'PIX - BRASAL COMBUSTÍVEIS',
+        //     bank: '341 ITAU UNIBANCO S.A.',
+        //     pix_endToEndId: 'E18236120202102031954s0447790WS5',
+        //     pix_value: '0,10',
+        //     pix_created_at: '03/02/2021 16:54:48',
+        //     company: 'Brasal Combustíveis Ltda',
+        //     station: {
+        //         name: 'Posto Sia',
+        //         cnpj: '00.097.626/0001-68',
+        //     },
+        //     attendant: {
+        //         name: 'HEBER DE ALMEIDA JACINTO',
+        //     },
+        //     client: {
+        //         name: 'CESAR HENRIQUE FERREIRA BORGES'
+        //     }
+        // };
+        // this.atualStep = 3;
     }
 
     numberOnly(event): boolean {
@@ -154,6 +184,7 @@ export class GerarPagamentoPage implements OnInit {
         this.loadingController.create({
             cssClass: 'my-custom-class',
             message: 'Imprimindo',
+            duration: 2000,
         }).then(l => l.present());
 
         this.getBase64ImageFromUrl(this.pagamento.qrcode_url).then((result: string) => {
@@ -170,10 +201,13 @@ export class GerarPagamentoPage implements OnInit {
         await this.printService.lineWrap(1);
 
         await this.printService.setFontSize(20);
-        await this.printService.printOriginalText(`Cnpj: 00.000.000/0001-55`);
+        await this.printService.printOriginalText(`${this.usuario.station.name}`);
         await this.printService.lineWrap(1);
 
-        await this.printService.printOriginalText(`Atendente: ${(this.colaborador.name ?? 'Error').substring(0, 38)}`);
+        await this.printService.printOriginalText(`Cnpj: ${this.authService.getUsuario().station.cnpj}`);
+        await this.printService.lineWrap(1);
+
+        await this.printService.printOriginalText(('Atendente: ' + this.colaborador.name ?? 'Error').substring(0, 37));
         await this.printService.lineWrap(1);
 
         await this.printService.printOriginalText(`Valor: R$ ${Number(this.form.get('price').value).toFixed(2).replace('.', ',')}`);
@@ -187,6 +221,70 @@ export class GerarPagamentoPage implements OnInit {
 
         await this.printService.printOriginalText(`www.brasal.com.br`);
         return await this.printService.lineWrap(4).then(r => true);
+    }
+
+    async imprimirComprovante() {
+        if (this.pagamento.is_paid) {
+            console.log('imprime');
+            this.loadingController.create({
+                cssClass: 'my-custom-class',
+                message: 'Imprimindo',
+                duration: 950,
+            }).then(l => l.present());
+            await this.printService.setAlignment(1);
+            await this.printService.printBitmap(environment.brasalLogo.replace('data:image/bmp;base64,', ''), 380, 164);
+            await this.printService.lineWrap(1);
+
+            await this.printService.setFontSize(26);
+            await this.printService.printOriginalText(`${this.pagamento.pix_data_print.company}`);
+            await this.printService.lineWrap(1);
+
+            await this.printService.printOriginalText(`${this.pagamento.pix_data_print.station.name}`);
+            await this.printService.lineWrap(1);
+
+            await this.printService.printOriginalText(`CNPJ: ${this.pagamento.pix_data_print.station.cnpj}`);
+            await this.printService.lineWrap(1);
+
+            await this.printService.setFontSize(21);
+            await this.printService.printOriginalText('Detalhes do pagamento.');
+            await this.printService.lineWrap(1);
+
+            await this.printService.setFontSize(19);
+            await this.printService.setAlignment(0);
+            await this.printService.printString(('Atendente: ' + this.pagamento.pix_data_print.attendant.name).substring(0, 37));
+            await this.printService.lineWrap(1);
+
+            await this.printService.printString(('Cliente: ' + this.pagamento.pix_data_print.client.name).substring(0, 36));
+            await this.printService.lineWrap(1);
+
+            await this.printService.setAlignment(1);
+            await this.printService.setFontSize(22);
+            await this.printService.printOriginalText(`Valor: ${this.pagamento.pix_data_print.pix_value}`);
+            await this.printService.lineWrap(1);
+
+            await this.printService.printOriginalText(`Data/Hora: ${this.pagamento.pix_data_print.pix_created_at}`);
+            await this.printService.lineWrap(1);
+
+            await this.printService.setFontSize(20);
+            await this.printService.printOriginalText(`Chave:`);
+            await this.printService.lineWrap(1);
+            await this.printService.setFontSize(20);
+            await this.printService.printOriginalText(`${this.pagamento.pix_data_print.pix_endToEndId}`);
+            await this.printService.lineWrap(4);
+        } else {
+            this.alertController.create({
+                cssClass: 'my-custom-class',
+                header: 'Ops. erro no sistema.',
+                message: 'Não foi possivel imprimir a guia.',
+                buttons: [
+                    {
+                        text: 'Ok',
+                        handler: () => {
+                        }
+                    }
+                ]
+            }).then(a => a.present());
+        }
     }
 
     async getBase64ImageFromUrl(imageUrl) {
@@ -215,17 +313,18 @@ export class GerarPagamentoPage implements OnInit {
             response => {
                 if (response.is_paid) {
                     this.pagamento.pix_data_print = response.pix_data_print;
+                    this.pagamento.is_paid = response.is_paid;
                     this.loadingController.dismiss();
                     this.atualStep++;
                 } else {
                     this.loadingController.dismiss();
                     this.alertController.create({
                         cssClass: 'my-custom-class',
-                        header: 'Confirm!',
-                        message: 'Pagamento ainda pendente',
+                        header: 'Atenção',
+                        message: 'Este pagamento esta pendente.',
                         buttons: [
                             {
-                                text: 'Okay',
+                                text: 'Ok',
                                 handler: () => {
                                 }
                             }

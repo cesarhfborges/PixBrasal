@@ -77,17 +77,23 @@
 
       <div class="option-items" *ngSwitchCase="3">
 
-        <div class="ion-no-margin ion-no-padding ion-text-center messageSTatus" style="margin-top: 36px;">
+        <div class="ion-no-margin ion-no-padding ion-text-center messageSTatus" style="margin-top: 20px;">
           <ion-item lines="none">
             <ion-icon name="checkmark-done-circle-outline" slot="start"></ion-icon>
             <ion-text>{{pagamento.is_paid ? pagamento.message : 'Pagamento Realizado com sucesso.'}}</ion-text>
           </ion-item>
         </div>
 
-        <p>Atendente: {{pagamento.pix_data_print?.attendant.name}}</p>
-        <p>Cliente: {{pagamento.pix_data_print?.client.name}}</p>
-        <p>Valor Pago: R$ {{pagamento.pix_data_print?.pix_value}}</p>
-        <p>Data/Hora: {{pagamento.pix_data_print?.pix_created_at}}</p>
+        <p class="ion-no-margin ion-no-padding" style="margin-top: 36px;">Atendente: {{(pagamento.pix_data_print?.attendant.name).substring(0,26)}}</p>
+        <p class="ion-no-margin ion-no-padding">Cliente: {{(pagamento.pix_data_print?.client.name).substring(0,26)}}</p>
+        <p class="ion-no-margin ion-no-padding">Valor Pago: R$ {{pagamento.pix_data_print?.pix_value}}</p>
+        <p class="ion-no-margin ion-no-padding">Data/Hora: {{pagamento.pix_data_print?.pix_created_at}}</p>
+
+        <div style="text-align: center; margin-top: 36px;">
+          <ion-button class="btn-qrPrint" size="large" color="primary" (click)="imprimirComprovante()">
+            <ion-icon name="print-outline" slot="icon-only" color="light"></ion-icon>
+          </ion-button>
+        </div>
 
       </div>
 

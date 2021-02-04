@@ -4,6 +4,7 @@ import {AuthService} from '../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {AlertService} from '../shared/services/alert.service';
 import {environment} from '../../environments/environment';
+import {AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginPage implements OnInit {
   constructor(
       private authService: AuthService,
       private router: Router,
+      private alertController: AlertController,
       private alertService: AlertService,
   ) {
     this.form = new FormGroup({
@@ -52,6 +54,18 @@ export class LoginPage implements OnInit {
             if (environment.production) {
               this.form.get('password').reset();
             }
+            this.alertController.create({
+              cssClass: 'my-custom-class',
+              header: 'Ops',
+              message: 'Usuário e/ou senha inválidos',
+              buttons: [
+                {
+                  text: 'Ok',
+                  handler: () => {
+                  }
+                }
+              ]
+            }).then(a => a.present());
             console.log();
             // this.inputEmail.el.firstChild.focus();
             // this.alertService.showAlertMessage({header: 'Ops', subHeader: '', message: 'Não foi possível efetuar login, verifique seu usuário/senha'});
