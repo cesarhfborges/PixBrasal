@@ -62,11 +62,12 @@ export class HomePage implements OnInit {
     this.atendentesService.getAtendentes().subscribe(
         response => {
           this.colaboradores = response;
+          this.toastService.showToast('A lista de atendentes foi atualizada.');
           event.target.complete();
         },
         error => {
           console.log(error);
-          event.target.complete();
+          event.target.cancel();
           this.toastService.showToastError('Ops, não foi possivel atualizar a lista de funcionarios, verifique a rede e tente novamente.');
         }
     );

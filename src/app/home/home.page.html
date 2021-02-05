@@ -1,66 +1,74 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-<!--    <ion-buttons slot="start">-->
-<!--      <ion-button>-->
-<!--        <ion-icon name="arrow-back-outline"></ion-icon>-->
-<!--      </ion-button>-->
-<!--    </ion-buttons>-->
-    <ion-title>
-      Pix Brasal
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="openConfig()">
-        <ion-icon name="settings-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-<!--    <ion-img style="height: 56px; width: 56px;" slot="end" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWZpMZGDqKPx_Bj6W10A9YvmgVlJSB4R2dIQ&usqp=CAU"></ion-img>-->
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <!--    <ion-buttons slot="start">-->
+        <!--      <ion-button>-->
+        <!--        <ion-icon name="arrow-back-outline"></ion-icon>-->
+        <!--      </ion-button>-->
+        <!--    </ion-buttons>-->
+        <ion-title>
+            Pix Brasal
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="openConfig()">
+                <ion-icon name="settings-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <!--    <ion-img style="height: 56px; width: 56px;" slot="end" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWZpMZGDqKPx_Bj6W10A9YvmgVlJSB4R2dIQ&usqp=CAU"></ion-img>-->
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed" [pullFactor]="1.2" [pullMin]="50" [pullMax]="250" [closeDuration]="5000">
+        <ion-refresher-content
+                pullingText="Arraste para atualizar"
+                refreshingSpinner="bubbles"
+                refreshingText="Atualizando atendentes..."
+        ></ion-refresher-content>
+    </ion-refresher>
 
-  <ion-img class="ion-margin-top ion-padding-top img-logo" src="assets/imgs/brasal_pix.png"></ion-img>
+    <ion-img class="ion-margin-top ion-padding-top img-logo" src="assets/imgs/brasal_pix.png"></ion-img>
 
-  <ion-text style="margin-top: 40px; display: block;">Selecione seu nome abaixo para iniciar o pagamento PIX:</ion-text>
+    <ion-text style="margin-top: 40px; display: block;">Selecione seu nome abaixo para iniciar o pagamento PIX:
+    </ion-text>
 
-  <form [formGroup]="form">
-    <ion-select
-            [interfaceOptions]="customAlertOptions"
-            formControlName="attendant_id"
-            interface="action-sheet"
-            placeholder="Selecione..."
-            ok-text="Selecionar"
-            okText="Selecionar"
-            cancelText="Cancelar"
-            class="selectUsuario"
-    >
-      <ion-select-option *ngFor="let c of colaboradores; let i = index;" [value]="c.id">{{c.name?.substring(0,28)}}</ion-select-option>
-    </ion-select>
-  </form>
+    <form [formGroup]="form">
+        <ion-select
+                [interfaceOptions]="customAlertOptions"
+                cancelText="Cancelar"
+                class="selectUsuario"
+                formControlName="attendant_id"
+                interface="action-sheet"
+                ok-text="Selecionar"
+                okText="Selecionar"
+                placeholder="Selecione..."
+        >
+            <ion-select-option *ngFor="let c of colaboradores; let i = index;"
+                               [value]="c.id">{{c.name?.substring(0, 28)}}</ion-select-option>
+        </ion-select>
+    </form>
 
-  <div style="margin-top: 25px;" class="details">
-    <p class="ion-no-margin ion-no-padding">
-      <ion-text color="primary">Brasal Combustiveis</ion-text>
-    </p>
-    <p class="ion-no-margin ion-no-padding">
-      <ion-text color="primary">{{usuario ? usuario.station.name : 'Error'}}</ion-text>
-    </p>
-    <p class="ion-no-margin ion-no-padding" style="margin-top: 16px">
-      <ion-text color="medium">{{dateNow | date : 'EEEE'}}</ion-text>
-    </p>
-    <p class="ion-no-margin ion-no-padding" style="padding-top: 4px;">
-      <ion-text color="primary">{{dateNow | date : 'dd/MM/yyyy  HH:mm:ss'}}</ion-text>
-    </p>
-  </div>
+    <div class="details" style="margin-top: 25px;">
+        <p class="ion-no-margin ion-no-padding">
+            <ion-text color="primary">Brasal Combustiveis</ion-text>
+        </p>
+        <p class="ion-no-margin ion-no-padding">
+            <ion-text color="primary">{{usuario ? usuario.station.name : 'Error'}}</ion-text>
+        </p>
+        <p class="ion-no-margin ion-no-padding" style="margin-top: 16px">
+            <ion-text color="medium">{{dateNow | date : 'EEEE'}}</ion-text>
+        </p>
+        <p class="ion-no-margin ion-no-padding" style="padding-top: 4px;">
+            <ion-text color="primary">{{dateNow | date : 'dd/MM/yyyy  HH:mm:ss'}}</ion-text>
+        </p>
+    </div>
 
 </ion-content>
 
-<ion-footer class="ion-no-border" [translucent]="true">
-  <ion-toolbar>
-    <ion-button (click)="showModal()" class="ion-no-margin" expand="block" color="secondary" size="large">Continuar</ion-button>
-  </ion-toolbar>
+<ion-footer [translucent]="true" class="ion-no-border">
+    <ion-toolbar>
+        <ion-button (click)="showModal()" class="ion-no-margin" color="secondary" expand="block" size="large">
+            Continuar
+        </ion-button>
+    </ion-toolbar>
 </ion-footer>

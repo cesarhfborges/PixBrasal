@@ -263,14 +263,7 @@ export class GerarPagamentoPage implements OnInit {
             await this.printService.lineWrap(1);
 
             await this.printService.printOriginalText(`Data/Hora: ${this.pagamento.pix_data_print.pix_created_at}`);
-            await this.printService.lineWrap(1);
-
-            await this.printService.setFontSize(20);
-            await this.printService.printOriginalText(`Chave:`);
-            await this.printService.lineWrap(1);
-            await this.printService.setFontSize(20);
-            await this.printService.printOriginalText(`${this.pagamento.pix_data_print.pix_endToEndId}`);
-            await this.printService.lineWrap(4);
+            await this.printService.lineWrap(6);
         } else {
             this.alertController.create({
                 cssClass: 'my-custom-class',
@@ -314,6 +307,7 @@ export class GerarPagamentoPage implements OnInit {
                 if (response.is_paid) {
                     this.pagamento.pix_data_print = response.pix_data_print;
                     this.pagamento.is_paid = response.is_paid;
+                    this.pagamento.message = response.message;
                     this.loadingController.dismiss();
                     this.atualStep++;
                 } else {
@@ -321,7 +315,7 @@ export class GerarPagamentoPage implements OnInit {
                     this.alertController.create({
                         cssClass: 'my-custom-class',
                         header: 'Atenção',
-                        message: 'Este pagamento esta pendente.',
+                        message: 'Este pagamento está pendente.',
                         buttons: [
                             {
                                 text: 'Ok',
